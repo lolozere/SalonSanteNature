@@ -175,7 +175,6 @@ img {
 -------------------------------------------------------------- */
 
 /* Small headers */
-.archive-title,
 .page-title,
 .widget-title,
 .entry-content th,
@@ -477,8 +476,8 @@ html {
 	font-size: 87.5%;
 }
 body {
-	font-size: 14px;
-	font-size: 1rem;
+	font-size: 13px;
+	font-size: 0.92857143rem;
 	font-family: Helvetica, Arial, sans-serif;
 	text-rendering: optimizeLegibility;
 	color: #444;
@@ -490,10 +489,12 @@ body.custom-font-enabled {
 }
 a {
 	outline: none;
-	color: #21759b;
+	text-decoration:none;
+	color: #00c4ff;
 }
 a:hover {
-	color: #0f3647;
+	color: #00c4ff;
+	text-decoration:underline;
 }
 
 /*#main.wrapper{
@@ -760,15 +761,16 @@ article.sticky .featured-post {
 }
 .entry-content h1,
 .comment-content h1 {
-	font-size: 21px;
-	font-size: 1.5rem;
+	font-size: 24px;
+	font-size: 1.71428571rem;
 	line-height: 1.5;
+	
 }
 .entry-content h2,
 .comment-content h2,
 .mu_register h2 {
-	font-size: 18px;
-	font-size: 1.285714286rem;
+	font-size: 21px;
+	font-size: 1.5rem;
 	line-height: 1.6;
 }
 .entry-content h3,
@@ -1443,7 +1445,7 @@ img#wpstats {
 	.site-content {
 		float: left;
 		width: 50%;
-		border:1px solid #C6C;
+		/*border:1px solid #C6C;*/
 	}
 	body.template-front-page .site-content,
 	body.single-attachment .site-content,
@@ -1453,12 +1455,12 @@ img#wpstats {
 	.widget-area {
 		float: left;
 		width: 22.4%;
-		border:1px solid #C6C;
+		/*border:1px solid #C6C;*/
 	}
 	.widget-area#troisieme {
 		float: right;
 		width: 24%;
-		border:1px solid #C6C;
+		/*border:1px solid #C6C;*/
 	}
 	.site-header h1,
 	.site-header h2 {
@@ -1546,8 +1548,10 @@ img#wpstats {
 		display: none;
 	}
 	.entry-header .entry-title {
-		font-size: 22px;
-		font-size: 1.571428571rem;
+		/*font-size: 22px;
+		font-size: 1.571428571rem;*/
+		font-size: 30px;
+		font-size: 2.142857141rem;
 	}
 	#respond form input[type="text"] {
 		width: 46.333333333%;
@@ -1738,3 +1742,269 @@ img#wpstats {
 		margin-left: 3.57142857rem;
 	}
 }
+
+
+/* SURCHARGE CSS
+-------------------------------------------------------------- */
+
+@font-face {
+    font-family: 'bebas_neueregular';
+    src: url('typo/bebasneue-webfont.eot');
+    src: url('typo/bebasneue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('typo/bebasneue-webfont.woff') format('woff'),
+         url('typ/obebasneue-webfont.ttf') format('truetype'),
+         url('typo/bebasneue-webfont.svg#bebas_neueregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.entry-header h1, .entry-content h1, .comment-content h1 {
+	color: #e23371;
+	font-family: 'bebas_neueregular', Verdana, Geneva, sans-serif;
+	font-weight:normal;
+	}
+	
+h1#conference{
+	color: #555;
+	font-family: 'bebas_neueregular', Verdana, Geneva, sans-serif;
+	font-weight:normal;
+	}
+	
+h1#therapeutes{
+	color: #fb6e07;
+	font-family: 'bebas_neueregular', Verdana, Geneva, sans-serif;
+	font-weight:normal;
+	}
+.entry-header#conference .entry-title#conference {
+   color: #555; 
+}
+.entry-header#therapeutes .entry-title#therapeutes {
+   color: #fb6e07; 
+}
+
+h2{
+	color: #555;
+	font-family: 'bebas_neueregular', Verdana, Geneva, sans-serif;
+	font-weight:normal;
+	}
+h2#conference{
+	color: #fff;
+	background-color: #00c4ff;
+	font-family: 'bebas_neueregular', Verdana, Geneva, sans-serif;
+	font-weight:normal;
+	display : inline ;
+	}
+
+blockquote {
+
+font-size: 16px;
+font-style: italic;
+width: 500px;
+margin: 0.25em 1.2em;
+padding: 0.25em 40px;
+line-height: 1.45;
+position: relative;
+color: #383838;
+}
+
+ 
+blockquote:before {
+display: block;
+content: "\201C";
+font-size: 80px;
+position: absolute;
+left: -20px;
+top: -20px;
+color: #e23371;
+font-family: Georgia, serif;
+}
+
+/*Variante du blockquote, à insérer dans les éléments de mise en page du tableau de bord si c'est possible
+------------------------------*/
+ul#accolade {
+font-size: 13px;
+width: 500px;
+margin: 0.25em 1.2em;
+padding: 0.25em 40px;
+line-height: 1.45;
+position: relative;
+color: #383838;
+}
+
+ul#accolade:before {
+display: block;
+content: "\007B";
+font-size: 80px;
+position: absolute;
+left: -15px;
+top: -20px;
+color: #e23371;
+font-family: Georgia, serif;
+}
+
+ul#accolade li{
+font-size: 13px;
+padding: 0;
+margin:2px 0 0;
+line-height: 1.8;
+position: relative;
+color: #383838;
+list-style-type:none;
+}
+
+/*------------------------------*/ 
+
+#secondary .widget_gauche a{
+	margin-left:20px;
+	}
+
+#secondary .widget_gauche a:hover{
+	margin-left:30px;
+	-webkit-transition: all 300ms cubic-bezier(0.600, 0, 0.735, 0.045); /* older webkit */
+	-webkit-transition: all 300ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+	-moz-transition: all 300ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+    -ms-transition: all 300ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+    -o-transition: all 300ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+    transition: all 300ms cubic-bezier(0.600, -0.280, 0.735, 0.045); /* easeInBack */
+
+	-webkit-transition-timing-function: cubic-bezier(0.600, 0, 0.735, 0.045); /* older webkit */
+	-webkit-transition-timing-function: cubic-bezier(0.600, -0.280, 0.735, 0.045);
+    -moz-transition-timing-function: cubic-bezier(0.600, -0.280, 0.735, 0.045);
+    -ms-transition-timing-function: cubic-bezier(0.600, -0.280, 0.735, 0.045);
+    -o-transition-timing-function: cubic-bezier(0.600, -0.280, 0.735, 0.045);
+    transition-timing-function: cubic-bezier(0.600, -0.280, 0.735, 0.045); /* easeInBack */	}
+
+
+#secondary #widget_blog{
+	border : 1px solid #ddd;
+	width: 210px;
+	margin:5px 0 10px 26px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	padding:10px;
+
+	background: -moz-linear-gradient(left,  rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+	
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+	
+	background: -webkit-linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+	
+	background: -o-linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Opera 11.10+ */
+	
+	background: -ms-linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* IE10+ */
+	
+	background: linear-gradient(to right,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C */
+	
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-8 */
+
+
+	}
+	
+#secondary #widget_blog #titre img{
+	overflow:hidden;
+	
+	}
+#secondary #widget_blog #titre {
+	margin-bottom:10px;
+	
+	}
+	
+#secondary #widget_blog #texte {
+	width:180px;
+	
+	}
+
+#secondary #widget_blog #texte a{
+	margin:0;
+	
+	}
+	
+#troisieme .widget_liste-exposants h1{
+	color: #3d121e;
+	background-color: #ffd403;
+	font-family: 'bebas_neueregular', Verdana, Geneva, sans-serif;
+	font-weight:normal;
+	display : inline ;
+	font-size: 24px;
+	font-size: 1.714285714rem;
+	line-height:40px;
+	letter-spacing:1px;
+	}
+#troisieme .widget_liste-therapeutes h1{
+	color: #fff;
+	background-color: #e23371;
+	font-family: 'bebas_neueregular', Verdana, Geneva, sans-serif;
+	font-weight:normal;
+	display : inline ;
+	font-size: 24px;
+	font-size: 1.714285714rem;
+	line-height:40px;
+	letter-spacing:1px;
+
+	}
+	
+#troisieme .widget_liste-therapeutes, #troisieme .widget_liste-exposants{
+	margin : 10px 0;
+	}
+	
+#troisieme .widget_liste-therapeutes ul li a, #troisieme .widget_liste-exposants ul li a{
+	color: #555;
+	font-family: 'Ropa Sans', sans-serif;
+	font-size:16px;
+	}
+#troisieme .widget_liste-therapeutes ul li, #troisieme .widget_liste-exposants ul li {
+	line-height:20px;
+	}
+
+/*liste des articles
+------------------------------*/ 
+
+ .entry-header .entry-title a {
+	color: #3d121e;
+}
+.entry-header .entry-title a:hover {
+	color: #ccc;
+}
+	
+/*article > .entry-header>  h1.entry-title {
+	font-size: 13px;
+	font-size: 0.92857143rem;
+	line-height: 2.181818182;
+	text-transform: lowercase;
+	font-family:Verdana, Geneva, sans-serif;
+	font-weight: bold;
+	
+}*/
+
+a.more-link{
+	display:block;
+	width:127px;
+	height:21px;
+	background:url(images/savoirplus_btn.png) no-repeat;
+	text-indent:-2000px;
+	}
+a.more-link:hover{
+	background:url(images/savoirplushover_btn.png) no-repeat;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

@@ -14,9 +14,30 @@
 		<div id="secondary" class="widget-area" role="complementary">
 			<?php dynamic_sidebar( 'sidebar-1' ); ?>
 	
-         
+         	<aside class="widget_gauche">
             <a href= "#" title="réservez votre pass bien-être"><img src="<?php echo get_template_directory_uri(); ?>/images/widget_pass_bienetre.png" /></a>
             
+            <a href= "#" title="réservez votre entrée gratuite"><img src="<?php echo get_template_directory_uri(); ?>/images/widget_entreegratuite.png" /></a>
+            
+            <a href= "#" title="recevez notre newsletter"><img src="<?php echo get_template_directory_uri(); ?>/images/widget_newsletter.png" /></a>
+            
+            <a href= "#" title="découvrez les exposants"><img src="<?php echo get_template_directory_uri(); ?>/images/widget_exposants.png" /></a>
+            
+            <a href= "#" title="recevez notre newsletter"><img src="<?php echo get_template_directory_uri(); ?>/images/widget_therapeutes.png" /></a>
+            
+            </aside>
+            
+            <aside id="widget_blog" class="widget_gauche">
+            
+            	<div id="titre">
+            	<img title="Actu Blog" src="<?php echo get_template_directory_uri(); ?>/images/actublog_titre.png" />
+            	<img src="<?php echo get_template_directory_uri(); ?>/images/photoblog_test.jpg" />
+                </div>
+                <div id="texte">
+            	<p>Sortie du livre « Paroles de Nathanaël », le Feng Shui du corps par Georges Rafflin et Françoise Riu disponible au Salon Santé Nature</p><br/>
+					<a href= "#" title="lire la suite">>> Lire la suite >></a>
+            	</div>
+            </aside>
         </div>
         
         
