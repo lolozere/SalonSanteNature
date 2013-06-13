@@ -36,9 +36,9 @@
 				<a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to content', 'ssn' ); ?>"><?php _e( 'Skip to content', 'ssn' ); ?></a>
 				<div>
 					<ul class="nav-menu">
-						<li class="menu-item"><a href="<?php get_permalink(3774);?>">Liste des exposants <?php echo $ssn_last_year;?></a></li>
+						<li class="menu-item"><a href="<?php echo get_permalink(3774);?>">Liste des exposants <?php echo $ssn_last_year;?></a></li>
 						<?php for($year=($ssn_last_year-1);$year>=($ssn_last_year-2);$year--) {?>
-						<li class="menu-item"><a href="<?php get_permalink(3774);?>?<?php echo $year;?>">Liste des exposants <?php echo $year;?></a></li>
+						<li class="menu-item"><a href="<?php echo get_permalink(3774);?>?<?php echo $year;?>">Liste des exposants <?php echo $year;?></a></li>
 						<?php }?>
 					</ul>
 				</div>
