@@ -1855,11 +1855,13 @@ list-style-type:none;
 
 /*------------------------------*/ 
 
-#secondary .widget_gauche a{
-	margin-left:20px;
-	}
-
-#secondary .widget_gauche a:hover{
+.widget-area .widget {
+    margin-bottom: 1.3rem;
+}
+#secondary .widget_sp_image img { border: 0; box-shadow: none; }
+#secondary .widget_sp_image h3 { display: none; }
+#secondary .widget_sp_image div.widget_sp_image-description { display: none; }
+#secondary .widget_sp_image a:hover {
 	margin-left:30px;
 	-webkit-transition: all 300ms cubic-bezier(0.600, 0, 0.735, 0.045); /* older webkit */
 	-webkit-transition: all 300ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
@@ -1873,10 +1875,11 @@ list-style-type:none;
     -moz-transition-timing-function: cubic-bezier(0.600, -0.280, 0.735, 0.045);
     -ms-transition-timing-function: cubic-bezier(0.600, -0.280, 0.735, 0.045);
     -o-transition-timing-function: cubic-bezier(0.600, -0.280, 0.735, 0.045);
-    transition-timing-function: cubic-bezier(0.600, -0.280, 0.735, 0.045); /* easeInBack */	}
+    transition-timing-function: cubic-bezier(0.600, -0.280, 0.735, 0.045); /* easeInBack */
+}
 
 
-#secondary #widget_blog{
+#secondary #widget_blog {
 	border : 1px solid #ddd;
 	width: 210px;
 	margin:5px 0 10px 26px;
@@ -1920,47 +1923,40 @@ list-style-type:none;
 	margin:0;
 	
 	}
-	
-#troisieme .widget_liste-exposants h1{
+/*------------------------------*/
+/* WIDGETS EXPOSANTS ET THERAPEUTES */ 
+/*------------------------------*/
+.widget_themes {
+	margin : 10px 0;
+}
+.widget_themes h3 {
+	font-family: 'bebas_neueregular', Verdana, Geneva, sans-serif;
+	font-weight:normal;
+	display : inline ;
+	font-size: 24px;
+	font-size: 1.714285714rem;
+	line-height:40px;
+	letter-spacing:1px;
+}
+.widget_exposants h3 {
 	color: #3d121e;
 	background-color: #ffd403;
-	font-family: 'bebas_neueregular', Verdana, Geneva, sans-serif;
-	font-weight:normal;
-	display : inline ;
-	font-size: 24px;
-	font-size: 1.714285714rem;
-	line-height:40px;
-	letter-spacing:1px;
-	}
-#troisieme .widget_liste-therapeutes h1{
+}
+.widget_therapeutes h3 {
 	color: #fff;
 	background-color: #e23371;
-	font-family: 'bebas_neueregular', Verdana, Geneva, sans-serif;
-	font-weight:normal;
-	display : inline ;
-	font-size: 24px;
-	font-size: 1.714285714rem;
-	line-height:40px;
-	letter-spacing:1px;
-
-	}
-	
-#troisieme .widget_liste-therapeutes, #troisieme .widget_liste-exposants{
-	margin : 10px 0;
-	}
-	
-#troisieme .widget_liste-therapeutes ul li a, #troisieme .widget_liste-exposants ul li a{
+}	
+.widget_themes ul li a {
 	color: #555;
 	font-family: 'Ropa Sans', sans-serif;
 	font-size:16px;
-	}
-#troisieme .widget_liste-therapeutes ul li, #troisieme .widget_liste-exposants ul li {
+}
+.widget_themes ul li {
 	line-height:20px;
-	}
+}
 
 /*liste des articles
 ------------------------------*/ 
-
  .entry-header .entry-title a {
 	color: #3d121e;
 }

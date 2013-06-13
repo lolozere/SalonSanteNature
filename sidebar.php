@@ -12,21 +12,7 @@
 
 	<?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
 		<div id="secondary" class="widget-area" role="complementary">
-			<?php dynamic_sidebar( 'sidebar-1' ); ?>
-	
-         	<aside class="widget_gauche">
-            <a href= "#" title="réservez votre pass bien-être"><img src="<?php echo get_template_directory_uri(); ?>/images/widget_pass_bienetre.png" /></a>
-            
-            <a href= "#" title="réservez votre entrée gratuite"><img src="<?php echo get_template_directory_uri(); ?>/images/widget_entreegratuite.png" /></a>
-            
-            <a href= "#" title="recevez notre newsletter"><img src="<?php echo get_template_directory_uri(); ?>/images/widget_newsletter.png" /></a>
-            
-            <a href= "#" title="découvrez les exposants"><img src="<?php echo get_template_directory_uri(); ?>/images/widget_exposants.png" /></a>
-            
-            <a href= "#" title="recevez notre newsletter"><img src="<?php echo get_template_directory_uri(); ?>/images/widget_therapeutes.png" /></a>
-            
-            </aside>
-            
+			<?php dynamic_sidebar( 'sidebar-1' ); ?>            
             <aside id="widget_blog" class="widget_gauche">
             
             	<div id="titre">
