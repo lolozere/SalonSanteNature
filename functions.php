@@ -370,6 +370,10 @@ require_once(get_template_directory().'/includes/widgets/newsletter-widget.php')
 require_once(get_template_directory().'/includes/widgets/exposants-access-widget.php');
 require_once(get_template_directory().'/includes/widgets/therapeutes-access-widget.php');
 require_once(get_template_directory().'/includes/widgets/themes-exposants-widget.php');
+require_once(get_template_directory().'/includes/widgets/themes-therapeutes-widget.php');
+require_once(get_template_directory().'/includes/widgets/posts-list-widget.php');
+require_once(get_template_directory().'/includes/widgets/exposants-list-widget.php');
+require_once(get_template_directory().'/includes/widgets/therapeutes-list-widget.php');
 
 /*-----------------------------------------------------------------------------------*/
 //	Order of list articles and filter by year
@@ -383,7 +387,7 @@ function ssn_fiche_alphabetical( $orderby ) {
 add_action('pre_get_posts', 'ssn_fiche_filter_by_year' );
 function ssn_fiche_filter_by_year( $wp_query ) {
 	global $ssn_current_year, $ssn_last_year;
-	if (is_archive()) {
+	if (is_archive() && !is_admin()) {
 		$year = (!empty($ssn_current_year))?$ssn_current_year:$ssn_last_year;
 		global $wp_query;
 		$wp_query->set('meta_key', SSN_FICHE_META_PREFIX.'year_'.$year);
@@ -450,14 +454,95 @@ function ssn_list_themes($taxonomy) {
 		return $output;
 }
 
+/**
+ * Display or retrieve the HTML list of a theme by taxonomy
+ *
+ * @param string $taxonomy
+ */
+function ssn_list_posts($post_type) {
+	global $ssn_current_year, $ssn_last_year;
+	
+	// year
+	$ssn_year = $ssn_last_year;
+	if (!empty($ssn_current_year))
+		$ssn_year = $ssn_current_year;
+	
+	$posts = get_posts(array(
+			'post_type' => $post_type, 'meta_key' => SSN_FICHE_META_PREFIX.'year_'.$ssn_year, 'meta_value' => '1',
+			'orderby' => 'name', 'order' => 'ASC', 'posts_per_page' => -1,
+		));
+	
+	if (count($posts) <= 0) {
+		switch($post_type) {
+			case 'exposant':
+				$output = '<p>'.__('Aucune fiche exposant en '.$ssn_year).'</p>';
+				break;
+			case 'therapeute':
+				$output = '<p>'.__('Aucune fiche thérapeute en '.$ssn_year).'</p>';
+				break;
+		}
+	} else {
+		$output = '<ul class="widget-' . esc_attr( $post_type ) . '-list">';
+		foreach ($posts as $post) {
+			$title = esc_attr( $post->post_title );
+			$output .= '<li><a href="' . esc_url( get_permalink($post->ID) ) . '" title="'.$title.'">'.$post->post_title.'</a></li>';
+		}
+		$output .= '</ul>';
+	}
+
+	echo $output;
+}
+
 /*
  * 
+ * 
+
+-- MIGRATION CONFERENCES
+
+UPDATE wp_posts SET post_type='conference' WHERE post_type='post' AND EXISTS(
+	SELECT * FROM wp_terms 
+	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
+	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
+	WHERE wp_terms.name LIKE 'Conférences%' AND object_id=wp_posts.ID 
+);
+INSERT INTO wp_postmeta (post_id, meta_key, meta_value)
+SELECT ID, 'SSN_META_year', '2012' 
+FROM wp_posts
+WHERE EXISTS(
+	SELECT * FROM wp_terms 
+	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
+	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
+	WHERE wp_terms.name LIKE 'Conférences 2012%' AND object_id=wp_posts.ID 
+);
+INSERT INTO wp_postmeta (post_id, meta_key, meta_value)
+SELECT ID, 'SSN_META_year', '2011' 
+FROM wp_posts
+WHERE EXISTS(
+	SELECT * FROM wp_terms 
+	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
+	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
+	WHERE wp_terms.name LIKE 'Conférences 2011%' AND object_id=wp_posts.ID 
+);
+
+-- MIGRATION EXPOSANTS
 
 UPDATE wp_posts SET post_type='exposant' WHERE post_type='post' AND EXISTS(
 	SELECT * FROM wp_terms 
 	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
 	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
 	WHERE wp_terms.name LIKE 'Exposants%' AND object_id=wp_posts.ID 
+);
+UPDATE wp_posts SET post_type='exposant' WHERE post_type='post' AND EXISTS(
+	SELECT * FROM wp_terms 
+	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
+	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
+	WHERE wp_terms.name LIKE 'Thérapies et bien-être%' AND object_id=wp_posts.ID 
+);
+UPDATE wp_posts SET post_type='exposant' WHERE post_type='post' AND EXISTS(
+	SELECT * FROM wp_terms 
+	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
+	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
+	WHERE wp_terms.name LIKE 'Monde solidaire%' AND object_id=wp_posts.ID 
 );
 
 INSERT INTO wp_postmeta (post_id, meta_key, meta_value)
@@ -470,7 +555,7 @@ WHERE EXISTS(
 	WHERE wp_terms.name LIKE 'Exposants 2011%' AND object_id=wp_posts.ID 
 );
 INSERT INTO wp_postmeta (post_id, meta_key, meta_value)
-SELECT ID, 'SSN_META_year_2011', '1' 
+SELECT ID, 'SSN_META_year_2012', '1' 
 FROM wp_posts
 WHERE EXISTS(
 	SELECT * FROM wp_terms 
