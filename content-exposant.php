@@ -14,7 +14,7 @@
 		<?php endif; ?>
 		<header class="entry-header">
 			<?php if ( is_single() ) : ?>
-			<strong class="fiche-title">Exposant <?php echo ssn_get_last_year();?></strong>
+			<strong class="fiche-title">Exposant <?php echo ssn_get_last_year();?></strong><br/>
 			<h1 class="entry-title"><?php the_title(); ?></h1>
 			<?php else : ?>
 			<h1 class="entry-title">
@@ -27,7 +27,7 @@
 		<ul class="entry-themes">
 			<?php $themes = explode('|', get_the_term_list( $post->ID, 'exposant_theme', '', '|', '')); 
 			foreach($themes as $link_theme) {
-				echo '<li>'.$link_theme.'</li>';
+				echo '<li>'.$link_theme.'</li><br/>';
 			}
 			?>
 		</ul><!-- .entry-themes -->
