@@ -14,7 +14,7 @@
 		<?php endif; ?>
 		<header class="entry-header">
 			<?php if ( is_single() ) : ?>
-			<strong class="fiche-title">Exposant <?php echo ssn_get_last_year();?></strong>
+			<strong class="fiche-title">Pôle Thérapeute <?php echo ssn_get_last_year();?></strong>
 			<h1 class="entry-title"><?php the_title(); ?></h1>
 			<?php else : ?>
 			<h1 class="entry-title">
@@ -25,7 +25,7 @@
 
 		<?php if ( !is_single() ) : // Only display Excerpts for Search ?>
 		<ul class="entry-themes">
-			<?php $themes = explode('|', get_the_term_list( $post->ID, 'exposant_theme', '', '|', '')); 
+			<?php $themes = explode('|', get_the_term_list( $post->ID, 'tpeute_theme', '', '|', '')); 
 			foreach($themes as $link_theme) {
 				echo '<li>'.$link_theme.'</li>';
 			}
@@ -53,7 +53,7 @@
 			}?>
 			<?php
 			if (!is_single()) {?>
-			<a href="<?php get_permalink();?>" class="more-link">En savoir plus</a>
+			<a href="<?php get_permalink();?>" class="more-link">Notre prestation sur le salon</a>
 			<?php }?>
 		</footer><!-- .entry-meta -->
 	</article><!-- #post -->

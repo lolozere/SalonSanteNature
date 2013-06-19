@@ -1,6 +1,10 @@
 <?php
 global $ssn_years;
 
+/**
+ * Return the most recent year of the post
+ * 
+ */
 function ssn_get_last_year() {
 	global $post;
 	$metas = get_metadata('post', $post->ID);
@@ -9,6 +13,8 @@ function ssn_get_last_year() {
 		$matches = array();
 		if ($meta_value[0] == 1 && preg_match('/'.SSN_FICHE_META_PREFIX.'year_([0-9]{4})/', $meta_key, $matches)) {
 			$years[] = $matches[1];
+		} elseif (preg_match('/'.SSN_FICHE_META_PREFIX.'year$/', $meta_key, $matches)) {
+			$years[] = $meta_value[0];
 		}
 	}
 	if (count($years) > 0) {
@@ -82,8 +88,8 @@ function ssn_exposant_build_taxonomies() {
 					'hierarchical' => true,
 					'labels' => $labels,
 					'query_var' => true,
-					'public'=>true,
-					'show_ui'=>true,
+					'public' => true,
+					'show_ui' => true,
 					'rewrite' => array( 'slug' => __('exposants-par-themes', 'ssn') )
 			)
 	);
@@ -183,12 +189,14 @@ function ssn_therapeute_build_taxonomies() {
 			'menu_name' => __('Thèmes thérapeute', 'ssn')
 	);
 	register_taxonomy(
-			'therapeute_theme',
+			'tpeute_theme',
 			'therapeute',
 			array(
 					'hierarchical' => true,
 					'labels' => $labels,
 					'query_var' => true,
+					'public'=>true,
+					'show_ui'=>true,
 					'rewrite' => array( 'slug' => __('therapeutes-par-themes', 'ssn') )
 			)
 	);
@@ -296,7 +304,7 @@ add_filter('request', 'ssn_conference_feed');
 /*-----------------------------------------------------------------------------------*/
 // Add columns
 add_filter("manage_edit-exposant_columns", "exposant_theme_edit_columns");
-add_filter("manage_edit-therapeute_columns", "therapeute_theme_edit_columns");
+add_filter("manage_edit-therapeute_columns", "tpeute_theme_edit_columns");
 add_filter("manage_edit-conference_columns", "conference_theme_edit_columns");
 add_action('admin_head', 'ssn_admin_column_with');
 
@@ -315,7 +323,7 @@ function exposant_theme_edit_columns($columns){
 	);
 	return $columns;
 }
-function therapeute_theme_edit_columns($columns){
+function tpeute_theme_edit_columns($columns){
 	$columns = array(
 			"cb" => "<input type=\"checkbox\" />",
 			"title" => __( 'Thérapeute', 'ssn' ),
@@ -355,7 +363,7 @@ function ssn_custom_columns_post_type($column){
 	if ($column == 'theme' && $post->post_type == 'exposant') {
 		echo get_the_term_list( $post->ID, 'exposant_theme', '', ', ', '');
 	} elseif ($column == 'theme' && $post->post_type == 'therapeute') {
-		echo get_the_term_list( $post->ID, 'therapeute_theme', '', ', ', '');
+		echo get_the_term_list( $post->ID, 'tpeute_theme', '', ', ', '');
 	} 
 }
 add_action("manage_posts_custom_column",  "ssn_custom_columns_post_type");
@@ -366,7 +374,7 @@ function ssn_restrict_listings() {
 	global $typenow;
 	global $wp_query;
 	
-	$taxonomies = array('exposant' => array('exposant_theme'), 'therapeute' => array('therapeute_theme'));
+	$taxonomies = array('exposant' => array('exposant_theme'), 'therapeute' => array('tpeute_theme'));
 	foreach($taxonomies as $post_type => $taxonomy_list) {
 		if ($post_type == $typenow) {
 			foreach($taxonomy_list as $taxonomy) {
@@ -398,9 +406,9 @@ function ssn_convert_theme_id_to_taxonomy_term_in_query($query) {
 	if (isset($qv['exposant_theme']) && $pagenow=='edit.php') {
 		$term = get_term_by('id', $qv['exposant_theme'], 'exposant_theme');
 		$qv['exposant_theme'] = $term->slug;
-	} elseif (isset($qv['therapeute_theme']) && $pagenow=='edit.php') {
-		$term = get_term_by('id', $qv['therapeute_theme'], 'therapeute_theme');
-		$qv['therapeute_theme'] = $term->slug;
+	} elseif (isset($qv['tpeute_theme']) && $pagenow=='edit.php') {
+		$term = get_term_by('id', $qv['tpeute_theme'], 'therapeute_theme');
+		$qv['tpeute_theme'] = $term->slug;
 	}
 }
 

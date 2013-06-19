@@ -24,7 +24,14 @@
 			<nav id="footermenu-conferences" class="menu-salon" role="navigation">
 				<h3><?php _e( 'Les conférences', 'ssn' ); ?></h3>
 				<a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to content', 'ssn' ); ?>"><?php _e( 'Skip to content', 'ssn' ); ?></a>
-				<p>En cours de dev par Laurent</p>
+				<div>
+					<ul class="nav-menu">
+						<li class="menu-item"><a href="<?php echo get_permalink(SSN_PAGE_CONFERENCES_ID);?>">Conférences <?php echo $ssn_last_year;?></a></li>
+						<?php for($year=($ssn_last_year-1);$year>=($ssn_last_year-2);$year--) {?>
+						<li class="menu-item"><a href="<?php echo get_permalink(SSN_PAGE_CONFERENCES_ID);?>?<?php echo $year;?>">Conférences <?php echo $year;?></a></li>
+						<?php }?>
+					</ul>
+				</div>
 			</nav>
 			<nav id="footermenu-pass" class="menu-salon" role="navigation">
 				<h3><?php _e( 'Le Pass Bien-être', 'ssn' ); ?></h3>
@@ -36,14 +43,14 @@
 				<a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to content', 'ssn' ); ?>"><?php _e( 'Skip to content', 'ssn' ); ?></a>
 				<div>
 					<ul class="nav-menu">
-						<li class="menu-item"><a href="<?php echo get_permalink(3774);?>">Liste des exposants <?php echo $ssn_last_year;?></a></li>
+						<li class="menu-item"><a href="<?php echo get_permalink(SSN_PAGE_EXPOSANTS_ID);?>">Liste des exposants <?php echo $ssn_last_year;?></a></li>
 						<?php for($year=($ssn_last_year-1);$year>=($ssn_last_year-2);$year--) {?>
-						<li class="menu-item"><a href="<?php echo get_permalink(3774);?>?<?php echo $year;?>">Liste des exposants <?php echo $year;?></a></li>
+						<li class="menu-item"><a href="<?php echo get_permalink(SSN_PAGE_EXPOSANTS_ID);?>?<?php echo $year;?>">Liste des exposants <?php echo $year;?></a></li>
 						<?php }?>
 					</ul>
 				</div>
 			</nav>
-			<nav id="footermenu-exposants" class="menu-salon" role="navigation">
+			<nav id="footermenu-bookstand" class="menu-salon" role="navigation">
 				<h3><?php _e( 'Réservez votre stand', 'ssn' ); ?></h3>
 				<a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to content', 'ssn' ); ?>"><?php _e( 'Skip to content', 'ssn' ); ?></a>
 				<?php wp_nav_menu( array( 'theme_location' => 'ssn-menu-book-stand', 'menu_class' => 'nav-menu' ) ); ?>

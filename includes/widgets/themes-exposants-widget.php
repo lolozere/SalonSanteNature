@@ -21,7 +21,7 @@ class SSN_Widget_ThemesExposant extends SSN_Widget {
 	 * @param array $instance
 	 */
 	function widget( $args, $instance ) {
-		$args['taxonomy'] = 'therapeute_theme';
+		$args['taxonomy'] = 'exposant_theme';
 		extract( $args );
 		extract( $instance );
 		include( $this->getTemplateHierarchy( 'widget-themes' ) );

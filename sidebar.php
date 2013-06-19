@@ -12,7 +12,19 @@
 
 	<?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>
 		<div id="secondary" class="widget-area" role="complementary">
-			<?php dynamic_sidebar( 'sidebar-1' ); ?>            
+			<?php 
+			if (is_front_page()) {
+				dynamic_sidebar( 'sidebar-mainhome' );
+			} elseif (is_rubrique_exposants()) {
+				dynamic_sidebar( 'sidebar-mainexposants' );
+			} elseif (is_rubrique_pass()) {
+				dynamic_sidebar( 'sidebar-mainpass' );
+			} elseif (is_rubrique_conferences()) {
+				dynamic_sidebar( 'sidebar-mainconference' );
+			} else {
+				dynamic_sidebar( 'sidebar-1' );
+			}
+			?>            
             <aside id="widget_blog" class="widget_gauche">
             
             	<div id="titre">
@@ -28,4 +40,4 @@
         
         
         <!-- #secondary -->
-	<?php endif; ?>
+	<?php endif;?>
