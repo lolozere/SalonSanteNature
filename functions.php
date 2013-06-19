@@ -29,6 +29,12 @@ if (!is_admin()) {
 	}
 }
 
+define('SSN_PAGE_EXPOSANTS_ID', 3774);
+define('SSN_PAGE_THERAPEUTES_ID', 3830);
+define('SSN_PAGE_CONFERENCES_ID', 3843);
+
+require_once(get_template_directory().'/includes/templating.php');
+
 function ssn_setup() {
 	/*
 	 * Makes Twenty Twelve available for translation.
@@ -52,6 +58,7 @@ function ssn_setup() {
 	register_nav_menu( 'ssn-menu-institutionnel', __( 'Menu institutionnel', 'ssn' ) );
 	register_nav_menu( 'ssn-menu-salon', __( 'Menu Salon', 'ssn' ) );
 	register_nav_menu( 'ssn-menu-salon-tour', __( 'Menu Découvrez le salon', 'ssn' ) );
+	register_nav_menu( 'ssn-menu-conferences', __( 'Menu Conférences', 'ssn' ) );
 	register_nav_menu( 'ssn-menu-pass', __( 'Menu Pass Bien-être', 'ssn' ) );
 	register_nav_menu( 'ssn-menu-book-stand', __( 'Menu Réservez votre stand', 'ssn' ) );
 
@@ -176,18 +183,105 @@ function ssn_widgets_init() {
 	register_sidebar( array(
 		'name' => __( 'Main Sidebar', 'ssn' ),
 		'id' => 'sidebar-1',
-		'description' => __( 'Colonne de gauche du site', 'ssn' ),
+		'description' => __( 'Colonne de gauche du site utilisée par défaut', 'ssn' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => '</aside>',
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 	) );
-	
+	/*
+	 * Les colonnes principales
+	 */
 	register_sidebar( array(
-		'name' => __( 'Informations complémentaires', 'ssn' ),
+			'name' => __( 'PRINCIPALE - Accueil', 'ssn' ),
+			'id' => 'sidebar-mainhome',
+			'description' => __( "Colonne de gauche du site sur la page d'accueil", 'ssn' ),
+			'before_widget' => '<aside id="%1$s" class="widgets-home widget %2$s">',
+			'after_widget' => '</aside>',
+			'before_title' => '<h3 class="widget-title">',
+			'after_title' => '</h3>',
+	) );
+	register_sidebar( array(
+			'name' => __( 'PRINCIPALE - Rubrique conférences', 'ssn' ),
+			'id' => 'sidebar-mainconference',
+			'description' => __( "Colonne de gauche du site sur la rubrique des conférences", 'ssn' ),
+			'before_widget' => '<aside id="%1$s" class="widgets-conference widget %2$s">',
+			'after_widget' => '</aside>',
+			'before_title' => '<h3 class="widget-title">',
+			'after_title' => '</h3>',
+	) );
+	register_sidebar( array(
+			'name' => __( 'PRINCIPALE - Rubrique pass bien-être', 'ssn' ),
+			'id' => 'sidebar-mainpass',
+			'description' => __( "Colonne de gauche du site sur les pages de la rubrique pass", 'ssn' ),
+			'before_widget' => '<aside id="%1$s" class="widgets-pass widget %2$s">',
+			'after_widget' => '</aside>',
+			'before_title' => '<h3 class="widget-title">',
+			'after_title' => '</h3>',
+	) );
+	register_sidebar( array(
+			'name' => __( 'PRINCIPALE - Rubrique exposants', 'ssn' ),
+			'id' => 'sidebar-mainexposants',
+			'description' => __( "Colonne de gauche du site sur les pages de la rubrique exposants", 'ssn' ),
+			'before_widget' => '<aside id="%1$s" class="widgets-pass widget %2$s">',
+			'after_widget' => '</aside>',
+			'before_title' => '<h3 class="widget-title">',
+			'after_title' => '</h3>',
+	) );
+	
+	/*
+	 * Les colonnes complémentaires
+	 */
+	register_sidebar( array(
+			'name' => __( 'SPLUS - Accueil', 'ssn' ),
+			'id' => 'sidebar-home',
+			'description' => __( "Colonne de droite sur la page d'accueil", 'ssn' ),
+			'before_widget' => '<aside id="%1$s" class="widgets-home widget-plus %2$s">',
+			'after_widget' => '</aside>',
+			'before_title' => '<h3 class="widget-title">',
+			'after_title' => '</h3>',
+	) );
+	register_sidebar( array(
+			'name' => __( 'SPLUS - Rubrique exposants', 'ssn' ),
+			'id' => 'sidebar-exposants',
+			'description' => __( "Colonne de droite par défaut sur les pages de la rubrique exposant", 'ssn' ),
+			'before_widget' => '<aside id="%1$s" class="widgets-exposant widget-plus %2$s">',
+			'after_widget' => '</aside>',
+			'before_title' => '<h3 class="widget-title">',
+			'after_title' => '</h3>',
+	) );
+	register_sidebar( array(
+			'name' => __( 'SPLUS - Rubrique conférences', 'ssn' ),
+			'id' => 'sidebar-conference',
+			'description' => __( "Colonne de droite par défaut sur les pages de la rubrique conférences", 'ssn' ),
+			'before_widget' => '<aside id="%1$s" class="widgets-conference widget-plus %2$s">',
+			'after_widget' => '</aside>',
+			'before_title' => '<h3 class="widget-title">',
+			'after_title' => '</h3>',
+	) );
+	register_sidebar( array(
+			'name' => __( 'SPLUS - Rubrique pass bien-être', 'ssn' ),
+			'id' => 'sidebar-pass',
+			'description' => __( "Colonne de droite par défaut sur les pages de la rubrique du pass bien-être", 'ssn' ),
+			'before_widget' => '<aside id="%1$s" class="widgets-pass widget-plus %2$s">',
+			'after_widget' => '</aside>',
+			'before_title' => '<h3 class="widget-title">',
+			'after_title' => '</h3>',
+	) );
+	register_sidebar( array(
+			'name' => __( 'SPLUS - Rubrique réserver stand', 'ssn' ),
+			'id' => 'sidebar-bookstand',
+			'description' => __( "Colonne de droite par défaut sur les pages de la rubrique pour réserver son stand", 'ssn' ),
+			'before_widget' => '<aside id="%1$s" class="widgets-bookstand widget-plus %2$s">',
+			'after_widget' => '</aside>',
+			'before_title' => '<h3 class="widget-title">',
+			'after_title' => '</h3>',
+	) );
+	register_sidebar( array(
+		'name' => __( 'SPLUS - Colonne droite par défaut', 'ssn' ),
 		'id' => 'contentplus',
-		'description' => __( 'Colonne de droite du site', 'ssn' ),
-		'before_widget' => '<aside id="%1$s" class="widget-plus %2$s">',
+		'description' => __( "Colonne par défaut s'affichant sur des pages qui n'appartiennent à aucune rubrique en particulier", 'ssn' ),
+		'before_widget' => '<aside id="%1$s" class="widgets-default widget-plus %2$s">',
 		'after_widget' => '</aside>',
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
@@ -195,11 +289,105 @@ function ssn_widgets_init() {
 }
 add_action( 'widgets_init', 'ssn_widgets_init' );
 
+function ssn_init_type_request() {
+	is_rubrique_exposants();
+	is_rubrique_conferences();
+	is_rubrique_pass();
+	is_rubrique_bookstand();
+}
+add_action('wp_head', 'ssn_init_type_request');
+
+/**
+ * Return true if current page is on exposant rubrique
+ */
+$ssn_is_rubrique_exposant = null;
+function is_rubrique_exposants() {
+	global $ssn_is_rubrique_exposant, $post;
+	if (empty($ssn_is_rubrique_exposant) && ((is_page() && get_queried_object_id() == SSN_PAGE_EXPOSANTS_ID) || (is_single() && $post->post_type == 'exposant'))) {
+		$ssn_is_rubrique_exposant = true;
+	} elseif (empty($ssn_is_rubrique_exposant)) {
+		global $wp_query;
+		$ssn_is_rubrique_exposant = (!empty($wp_query->query_vars['exposant_theme']));
+	}
+	return $ssn_is_rubrique_exposant;
+}
+$ssn_is_rubrique_conferences = null;
+function is_rubrique_conferences() {
+	global $ssn_is_rubrique_conferences, $post;
+	if (empty($ssn_is_rubrique_conferences) && is_single() && $post->post_type == 'conference') {
+		$ssn_is_rubrique_conferences = true;
+	} elseif (empty($ssn_is_rubrique_conferences)) {
+		$ssn_is_rubrique_conferences = false;
+		$menu = wp_get_nav_menu_object( 'ssn-menu-conferences' );
+		if ( ! $menu && ( $locations = get_nav_menu_locations() ) && isset( $locations[ 'ssn-menu-conferences' ] ) ) {
+			$menu = wp_get_nav_menu_object( $locations[ 'ssn-menu-conferences' ] );
+		}
+		if ( $menu && ! is_wp_error($menu) && !isset($menu_items) ) {
+			$menu_items = wp_get_nav_menu_items( $menu->term_id, array( 'update_post_term_cache' => false ) );
+			foreach($menu_items as $menu_item) {
+				if (!(strpos($_SERVER['REQUEST_URI'], $menu_item->url) === false) || !(strpos($menu_item->url, $_SERVER['REQUEST_URI']) === false)) {
+					$ssn_is_rubrique_conferences = true;
+				}
+			}
+		}
+	}
+	return $ssn_is_rubrique_conferences;
+}
+$ssn_is_rubrique_bookstand = null;
+function is_rubrique_bookstand() {
+	global $ssn_is_rubrique_bookstand, $post;
+	if (empty($ssn_is_rubrique_bookstand)) {
+		$ssn_is_rubrique_bookstand = false;
+		$menu = wp_get_nav_menu_object( 'ssn-menu-book-stand' );
+		if ( ! $menu && ( $locations = get_nav_menu_locations() ) && isset( $locations[ 'ssn-menu-book-stand' ] ) ) {
+			$menu = wp_get_nav_menu_object( $locations[ 'ssn-menu-book-stand' ] );
+		}
+		if ( $menu && ! is_wp_error($menu) && !isset($menu_items) ) {
+			$menu_items = wp_get_nav_menu_items( $menu->term_id, array( 'update_post_term_cache' => false ) );
+			foreach($menu_items as $menu_item) {
+				if (!(strpos($_SERVER['REQUEST_URI'], $menu_item->url) === false) || !(strpos($menu_item->url, $_SERVER['REQUEST_URI']) === false)) {
+					$ssn_is_rubrique_bookstand = true;
+				}
+			}
+		}
+	}
+	return $ssn_is_rubrique_bookstand;
+}
+/**
+ * Return true if current page is on pass rubrique
+ */
+$ssn_is_rubrique_pass = null;
+function is_rubrique_pass() {
+	global $ssn_is_rubrique_pass, $post;
+	if (empty($ssn_is_rubrique_pass) && ((is_page() && in_array(get_queried_object_id(), array(SSN_PAGE_THERAPEUTES_ID))) || (is_single() && $post->post_type == 'therapeute'))) {
+		$ssn_is_rubrique_pass = true;
+	} elseif (empty($ssn_is_rubrique_pass)) {
+		global $wp_query;
+		$ssn_is_rubrique_pass = (!empty($wp_query->query_vars['tpeute_theme']));
+		if (!$ssn_is_rubrique_pass) {
+			$menu = wp_get_nav_menu_object( 'ssn-menu-pass' );
+			if ( ! $menu && ( $locations = get_nav_menu_locations() ) && isset( $locations[ 'ssn-menu-pass' ] ) ) {
+				$menu = wp_get_nav_menu_object( $locations[ 'ssn-menu-pass' ] );
+			}
+			if ( $menu && ! is_wp_error($menu) && !isset($menu_items) ) {
+				$menu_items = wp_get_nav_menu_items( $menu->term_id, array( 'update_post_term_cache' => false ) );
+				foreach($menu_items as $menu_item) {
+					if (!(strpos($_SERVER['REQUEST_URI'], $menu_item->url) === false) || !(strpos($menu_item->url, $_SERVER['REQUEST_URI']) === false)) {
+						$ssn_is_rubrique_conferences = true;
+					}
+				}
+			}
+			$ssn_is_rubrique_pass = false;
+		}
+	}
+	return $ssn_is_rubrique_pass;
+}
+
+
 if ( ! function_exists( 'ssn_content_nav' ) ) :
 /**
  * Displays navigation to next/previous pages when applicable.
  *
- * @since Twenty Twelve 1.0
  */
 function ssn_content_nav( $html_id ) {
 	global $wp_query;
@@ -370,6 +558,11 @@ require_once(get_template_directory().'/includes/widgets/newsletter-widget.php')
 require_once(get_template_directory().'/includes/widgets/exposants-access-widget.php');
 require_once(get_template_directory().'/includes/widgets/therapeutes-access-widget.php');
 require_once(get_template_directory().'/includes/widgets/themes-exposants-widget.php');
+require_once(get_template_directory().'/includes/widgets/themes-therapeutes-widget.php');
+require_once(get_template_directory().'/includes/widgets/posts-list-widget.php');
+require_once(get_template_directory().'/includes/widgets/exposants-list-widget.php');
+require_once(get_template_directory().'/includes/widgets/therapeutes-list-widget.php');
+require_once(get_template_directory().'/includes/widgets/conferences-list-widget.php');
 
 /*-----------------------------------------------------------------------------------*/
 //	Order of list articles and filter by year
@@ -383,7 +576,35 @@ function ssn_fiche_alphabetical( $orderby ) {
 add_action('pre_get_posts', 'ssn_fiche_filter_by_year' );
 function ssn_fiche_filter_by_year( $wp_query ) {
 	global $ssn_current_year, $ssn_last_year;
-	if (is_archive()) {
+	/*
+	 * Pour une raison inconnue, Wordpress ne détectete par les URLS commençant par therapeutes-par-themes
+	* On fait le rewirting nous-même
+	*/
+	if (preg_match('/'.__('therapeutes\-par\-themes').'/', $_SERVER['REQUEST_URI']) && !empty($wp_query->query_vars['category_name'])) {
+		$wp_query->set('tpeute_theme', $wp_query->get('category_name'));
+		$wp_query->set('taxonomy', 'tpeute_theme');
+		$wp_query->set('term', $wp_query->get('tpeute_theme'));
+		$wp_query->set('category_name', '');
+		$wp_query->is_tax = true; $wp_query->is_category = false;
+	}
+	if (preg_match('/'.__('therapeute').'\//', $_SERVER['REQUEST_URI']) && !empty($wp_query->query_vars['category_name'])) {
+		$wp_query->set('therapeute', $wp_query->get('category_name'));
+		$wp_query->set('post_type', 'therapeute');
+		$wp_query->set('name', $wp_query->get('category_name'));
+		$wp_query->set('category_name', '');
+		$wp_query->is_single = true; $wp_query->is_archive = false; $wp_query->is_category = false;
+	}
+	if (preg_match('/'.__('conference\/.+').'\//', $_SERVER['REQUEST_URI']) && !empty($wp_query->query_vars['category_name'])) {
+		$wp_query->set('conference', $wp_query->get('category_name'));
+		$wp_query->set('post_type', 'conference');
+		$wp_query->set('name', $wp_query->get('category_name'));
+		$wp_query->set('category_name', '');
+		$wp_query->is_single = true; $wp_query->is_archive = false; $wp_query->is_category = false;
+	}
+	/*
+	 * Cas normal...
+	 */
+	if (is_archive() && !is_admin()) {
 		$year = (!empty($ssn_current_year))?$ssn_current_year:$ssn_last_year;
 		global $wp_query;
 		$wp_query->set('meta_key', SSN_FICHE_META_PREFIX.'year_'.$year);
@@ -397,7 +618,7 @@ function ssn_fiche_filter_by_year( $wp_query ) {
  * @param string $taxonomy
  */
 function ssn_list_themes($taxonomy) {
-	global $ssn_current_year;
+	global $ssn_current_year, $ssn_last_year;
 	$r = array(
 			'show_option_all' => true, 'show_option_none' => false,
 			'orderby' => 'name', 'order' => 'ASC',
@@ -411,9 +632,16 @@ function ssn_list_themes($taxonomy) {
 			'echo' => 1, 'depth' => 0,
 			'taxonomy' => $taxonomy
 	);
+	
+	// Year
+	$ssn_year = $ssn_last_year;
+	if (is_single()) {
+		$ssn_year = (is_null($year_found = ssn_get_last_year()))?$ssn_year:$year_found;
+	} elseif (!empty($ssn_current_year))
+		$ssn_year = $ssn_current_year;
 	$request_uri_get_year = null;
-	if (!empty($ssn_current_year))
-		$request_uri_get_year = '?'.$ssn_current_year;
+	if ($ssn_year != $ssn_last_year)
+		$request_uri_get_year = '?'.$ssn_year;
 	
 	if ( !isset( $r['pad_counts'] ) && $r['show_count'] && $r['hierarchical'] )
 		$r['pad_counts'] = true;
@@ -450,14 +678,103 @@ function ssn_list_themes($taxonomy) {
 		return $output;
 }
 
+/**
+ * Display or retrieve the HTML list of a theme by taxonomy
+ *
+ * @param string $taxonomy
+ */
+function ssn_list_posts($post_type) {
+	global $ssn_current_year, $ssn_last_year;
+	
+	$ssn_year = $ssn_last_year;
+	if (is_single()) {
+		$ssn_year = (is_null($year_found = ssn_get_last_year()))?$ssn_year:$year_found;
+	} elseif (!empty($ssn_current_year))
+		$ssn_year = $ssn_current_year;
+	
+	$metas_args = array('meta_key' => SSN_FICHE_META_PREFIX.'year_'.$ssn_year, 'meta_value' => '1');
+	if ($post_type == 'conference') {
+		$metas_args = array('meta_key' => SSN_FICHE_META_PREFIX.'year', 'meta_value' => $ssn_year);
+	}
+	$posts = get_posts(array_merge(array(
+			'post_type' => $post_type, 
+			'orderby' => 'title', 'order' => 'ASC', 'posts_per_page' => -1,
+		), $metas_args));
+	
+	if (count($posts) <= 0) {
+		switch($post_type) {
+			case 'exposant':
+				$output = '<p>'.__('Aucune fiche exposant en '.$ssn_year).'</p>';
+				break;
+			case 'therapeute':
+				$output = '<p>'.__('Aucune fiche thérapeute en '.$ssn_year).'</p>';
+				break;
+			case 'conference':
+				$output = '<p>'.__('Aucune fiche conférence en '.$ssn_year).'</p>';
+				break;
+		}
+	} else {
+		$output = '<ul class="widget-' . esc_attr( $post_type ) . '-list">';
+		foreach ($posts as $post) {
+			$title = esc_attr( $post->post_title );
+			$output .= '<li><a href="' . esc_url( get_permalink($post->ID) ) . '" title="'.$title.'">'.$post->post_title.'</a></li>';
+		}
+		$output .= '</ul>';
+	}
+
+	echo $output;
+}
+
 /*
  * 
+ * 
+
+-- MIGRATION CONFERENCES
+
+UPDATE wp_posts SET post_type='conference' WHERE post_type='post' AND EXISTS(
+	SELECT * FROM wp_terms 
+	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
+	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
+	WHERE wp_terms.name LIKE 'Conférences%' AND object_id=wp_posts.ID 
+);
+INSERT INTO wp_postmeta (post_id, meta_key, meta_value)
+SELECT ID, 'SSN_META_year', '2012' 
+FROM wp_posts
+WHERE EXISTS(
+	SELECT * FROM wp_terms 
+	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
+	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
+	WHERE wp_terms.name LIKE 'Conférences 2012%' AND object_id=wp_posts.ID 
+);
+INSERT INTO wp_postmeta (post_id, meta_key, meta_value)
+SELECT ID, 'SSN_META_year', '2011' 
+FROM wp_posts
+WHERE EXISTS(
+	SELECT * FROM wp_terms 
+	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
+	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
+	WHERE wp_terms.name LIKE 'Conférences 2011%' AND object_id=wp_posts.ID 
+);
+
+-- MIGRATION EXPOSANTS
 
 UPDATE wp_posts SET post_type='exposant' WHERE post_type='post' AND EXISTS(
 	SELECT * FROM wp_terms 
 	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
 	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
 	WHERE wp_terms.name LIKE 'Exposants%' AND object_id=wp_posts.ID 
+);
+UPDATE wp_posts SET post_type='exposant' WHERE post_type='post' AND EXISTS(
+	SELECT * FROM wp_terms 
+	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
+	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
+	WHERE wp_terms.name LIKE 'Thérapies et bien-être%' AND object_id=wp_posts.ID 
+);
+UPDATE wp_posts SET post_type='exposant' WHERE post_type='post' AND EXISTS(
+	SELECT * FROM wp_terms 
+	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
+	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
+	WHERE wp_terms.name LIKE 'Monde solidaire%' AND object_id=wp_posts.ID 
 );
 
 INSERT INTO wp_postmeta (post_id, meta_key, meta_value)
@@ -470,7 +787,7 @@ WHERE EXISTS(
 	WHERE wp_terms.name LIKE 'Exposants 2011%' AND object_id=wp_posts.ID 
 );
 INSERT INTO wp_postmeta (post_id, meta_key, meta_value)
-SELECT ID, 'SSN_META_year_2011', '1' 
+SELECT ID, 'SSN_META_year_2012', '1' 
 FROM wp_posts
 WHERE EXISTS(
 	SELECT * FROM wp_terms 

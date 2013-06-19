@@ -1,16 +1,16 @@
 <?php
 // Load the widget on widgets_init
-function ssn_load_themesexposant_widget() {
-	register_widget('SSN_Widget_ThemesExposant');
+function ssn_load_themestherapeute_widget() {
+	register_widget('SSN_Widget_ThemesTherapeute');
 }
-add_action('widgets_init', 'ssn_load_themesexposant_widget');
+add_action('widgets_init', 'ssn_load_themestherapeute_widget');
 
 /**
- * SSN_Widget_ThemesExposant class
+ * SSN_Widget_ThemesTherapeute class
  **/
-class SSN_Widget_ThemesExposant extends SSN_Widget {
+class SSN_Widget_ThemesTherapeute extends SSN_Widget {
 	
-	function SSN_Widget_ThemesExposant() {
+	function SSN_Widget_ThemesTherapeute() {
 		$this->SSN_Widget();
 	}
 	
@@ -21,7 +21,7 @@ class SSN_Widget_ThemesExposant extends SSN_Widget {
 	 * @param array $instance
 	 */
 	function widget( $args, $instance ) {
-		$args['taxonomy'] = 'exposant_theme';
+		$args['taxonomy'] = 'tpeute_theme';
 		extract( $args );
 		extract( $instance );
 		include( $this->getTemplateHierarchy( 'widget-themes' ) );
@@ -56,19 +56,19 @@ class SSN_Widget_ThemesExposant extends SSN_Widget {
 	function get_base_settings() {
 		return array(
 				'widget_ops' => array(
-					'name' => __( "SSN: Thèmes Exposants", 'ssn'),
-					'description' => __( "Liste des thèmes des exposants", 'ssn'),
-					'classname' => 'widget_exposants widget_themes'
+					'name' => __( "SSN: Thèmes Thérapeutes", 'ssn'),
+					'description' => __( "Liste des thèmes des thérapeutes", 'ssn'),
+					'classname' => 'widget_therapeutes widget_themes'
 				),
 				'control_ops' => array(
-					'id_base' => 'ssn_themesexposant',
+					'id_base' => 'ssn_themestherapeute',
 				),
 			);
 	}
 	
 	function get_defaults() {
 		return array(
-				'title' => "Liste des exposants par thème",
+				'title' => "Liste des thérapeutes par thème",
 			);
 	}
 

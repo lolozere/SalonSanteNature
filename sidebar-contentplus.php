@@ -9,23 +9,23 @@
  * @since Twenty Twelve 1.0
  */
 ?>
-
-	<?php if ( is_active_sidebar( 'contentplus' ) ) : ?>
+	<?php 
+	if ( is_active_sidebar( 'contentplus' ) && !ssn_is_full_page() && !ssn_is_two_columns()) : ?>
 		<div id="troisieme" class="widget-area" role="complementary">
-			<?php dynamic_sidebar( 'contentplus' ); ?>
-           
-           <aside class="widget_therapeutes widget_themes">
-           		<h3>Liste des thérapeutes par thème</h3>
-           		<ul>
-                	<li><a href="#" >Réflexologies</a></li>
-                    <li><a href="#" >Massages</a></li>
-                    <li><a href="#" >Ostéopathie</a></li>
-                    <li><a href="#" >Soins énergétiques</a></li>
-                    <li><a href="#" >Ennéagramme</a></li>
-                    <li><a href="#" >Éducation à la communication</a></li>
-                    <li><a href="#" >Parcours du dos</a></li>
-                </ul>
-           </aside>
-            
-		</div><!-- #secondary -->
+			<?php 
+			if (is_front_page()) {
+				dynamic_sidebar( 'sidebar-home' );
+			} elseif (is_rubrique_exposants()) {
+				dynamic_sidebar( 'sidebar-exposants' );
+			} elseif (is_rubrique_pass()) {
+				dynamic_sidebar( 'sidebar-pass' );
+			} elseif (is_rubrique_conferences()) {
+				dynamic_sidebar( 'sidebar-conference' );
+			} elseif (is_rubrique_bookstand()) {
+				dynamic_sidebar( 'sidebar-bookstand' );
+			} else {
+				dynamic_sidebar( 'contentplus' );
+			}
+			?>
+		</div><!-- #troisieme -->
 	<?php endif; ?>

@@ -1,10 +1,8 @@
 <?php
 echo $before_widget;
 if ( !empty( $title ) ) { echo $before_title . $title . $after_title; }
-?>
-<ul>
-	<?php ssn_list_themes($taxonomy);?>
-</ul>
-<?
+
+ssn_list_posts($post_type);
+
 echo $after_widget;
 ?>

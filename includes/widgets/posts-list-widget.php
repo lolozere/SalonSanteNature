@@ -1,16 +1,10 @@
 <?php
-// Load the widget on widgets_init
-function ssn_load_themesexposant_widget() {
-	register_widget('SSN_Widget_ThemesExposant');
-}
-add_action('widgets_init', 'ssn_load_themesexposant_widget');
-
 /**
- * SSN_Widget_ThemesExposant class
+ * SSN_Widget_PostsList class
  **/
-class SSN_Widget_ThemesExposant extends SSN_Widget {
+abstract class SSN_Widget_PostsList extends SSN_Widget {
 	
-	function SSN_Widget_ThemesExposant() {
+	function SSN_Widget_PostsList() {
 		$this->SSN_Widget();
 	}
 	
@@ -21,10 +15,10 @@ class SSN_Widget_ThemesExposant extends SSN_Widget {
 	 * @param array $instance
 	 */
 	function widget( $args, $instance ) {
-		$args['taxonomy'] = 'exposant_theme';
+		$args['post_type'] = $this->get_type();
 		extract( $args );
 		extract( $instance );
-		include( $this->getTemplateHierarchy( 'widget-themes' ) );
+		include( $this->getTemplateHierarchy( 'widget-post-types' ) );
 	}
 	
 	/**
@@ -56,20 +50,21 @@ class SSN_Widget_ThemesExposant extends SSN_Widget {
 	function get_base_settings() {
 		return array(
 				'widget_ops' => array(
-					'name' => __( "SSN: Thèmes Exposants", 'ssn'),
-					'description' => __( "Liste des thèmes des exposants", 'ssn'),
-					'classname' => 'widget_exposants widget_themes'
+					'name' => __( "SSN: Fiches", 'ssn'),
+					'description' => __( "Liste des fiches par ordre alphabétique", 'ssn'),
+					'classname' => 'widget_fiches widget_by_name'
 				),
 				'control_ops' => array(
-					'id_base' => 'ssn_themesexposant',
+					'id_base' => 'ssn_fiches',
 				),
 			);
 	}
 	
 	function get_defaults() {
 		return array(
-				'title' => "Liste des exposants par thème",
+				'title' => "Liste des fiches par ordre alphabétique",
 			);
 	}
 
+	abstract function get_type();
 }
