@@ -1,7 +1,7 @@
 <?php /* Template Name: Liste des exposants */
 get_header(); ?>
 <?php get_sidebar(); ?>
-	<div id="primary" class="site-content">
+	<div id="primary" class="site-content <?echo ssn_get_class_content();?>">
 		<div id="content" role="main" class="articles-list exposants-list">
 			<?php
 			$list_args = array( 'post_type' => 'exposant', 'posts_per_page' => 10, 'paged' => $paged, 'orderby' => 'title', 'order' => 'ASC' );

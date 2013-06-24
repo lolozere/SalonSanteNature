@@ -3,7 +3,7 @@
 
 get_header(); ?>
 <?php get_sidebar(); ?>
-	<div id="primary" class="site-content two-columns">
+	<div id="primary" class="site-content two-columns <?echo ssn_get_class_content();?>">
 		<div id="content" role="main">
 
 			<?php while ( have_posts() ) : the_post(); ?>

@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 <?php get_sidebar(); ?>
 <?php global $ssn_current_year; ?>
-	<section id="primary" class="site-content">
+	<section id="primary" class="site-content <?echo ssn_get_class_content();?>">
 		<div id="content" role="main" class="articles-list exposants-list">
 			<?php if ( have_posts() ) : ?>
 				<header class="archive-header">

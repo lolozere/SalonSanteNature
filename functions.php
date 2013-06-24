@@ -382,6 +382,20 @@ function is_rubrique_pass() {
 	return $ssn_is_rubrique_pass;
 }
 
+function ssn_get_class_content() {
+	if (is_rubrique_pass()) {
+		return 'content-pass';
+	} elseif (is_rubrique_conferences()) {
+		return 'content-conference';
+	} elseif (is_rubrique_exposants()) {
+		return 'content-exposant';
+	} elseif (is_rubrique_bookstand()) {
+		return 'content-bookstand';
+	} else {
+		return 'content-generic';
+	}
+}
+
 
 if ( ! function_exists( 'ssn_content_nav' ) ) :
 /**
