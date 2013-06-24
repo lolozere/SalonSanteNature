@@ -531,7 +531,11 @@ a:hover {
 	/*background-color: #fff;*/
 }
 .site-content {
-	margin: 24px 0 0 10px;
+	margin: 24px 0 0 0;
+	/*margin: 1.714285714rem 0 0;*/
+}
+.site-content #content{
+	margin: 0 10px 0 30px;
 	/*margin: 1.714285714rem 0 0;*/
 }
 .widget-area {
@@ -806,7 +810,7 @@ a:hover {
 #headermenu-institutionnel .menu-item{
 	display:inline;
 	font-size:18px;
-	margin-right:50px;
+	margin-right:40px;
 	font-family: 'Ropa Sans', sans-serif;
 	}
 #headermenu-institutionnel .menu-item a{
@@ -908,7 +912,7 @@ footer .footer-salon, footer .footer-credits {
 /*footer salon*/
 
 footer .footer-salon{
-	height:150px;
+	height:130px;
 
 }
 #footermenu-salon-tour{
@@ -977,7 +981,7 @@ footer .footer-salon{
 footer .footer-institutionnel{
 	height:80px;
 	background-color:#545246;
-	
+	margin-top:20px;
 }
 footer .footer-institutionnel a{
 	color:#10b5e4;
@@ -2282,6 +2286,7 @@ list-style-type:none;
 	font-size: 1.714285714rem;
 	line-height:40px;
 	letter-spacing:1px;
+	padding:3px;
 }
 .widget_exposants h3 {
 	color: #3d121e;

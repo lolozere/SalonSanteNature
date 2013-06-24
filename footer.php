@@ -67,7 +67,7 @@
         
         
 		<div class="footer-credits">
-			© Un site Salon Santé Nature, réalisé par <a href="http://www.soletic.org">Sol&TIC</a> et propulsé par WordPress
+			© Un site Salon Santé Nature, réalisé par <a href="http://www.soletic.org">Sol&TIC</a> et propulsé par WordPress - Mentions légales
 		</div>
 	</footer><!-- #colophon -->
 
