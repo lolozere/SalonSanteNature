@@ -58,7 +58,7 @@ window.onload=startList;
 
 <body <?php body_class(); ?>>
 
-	<header id="masthead" class="site-header" role="banner">
+	<header id="masthead" class="site-header header-salon header-conference header-pass header-exposant header-stand " role="banner">
 		<div class="site-header-content">
 			<hgroup>
 				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>

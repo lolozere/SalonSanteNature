@@ -660,13 +660,16 @@ a:hover {
 	}
 
 	#nav li { /*float the main list items*/
-		margin: 0;
+		margin: 0 ;
 		float: left;
 		display: block;
 		/*padding-right: 15px;*/
 		/*border:1px solid #F00;*/
 
 	}
+	/*#nav li:after{
+		content:"|";
+		}*/
 
 	#nav li ul {
 		display: none;
@@ -721,8 +724,13 @@ a:hover {
 		float: left; /*ie doesn't inherit the float*/
 		color: #CCC;
 		width: auto;
-		margin-right: 5px;
+		margin-right: 15px;
 	}
+	#nav li.on ul a:after, #nav li.off ul a:after {
+		content:" |";
+		
+	}
+	
 
 	#nav li.on:hover ul a, #nav li.over ul li a { /*for ie - the specificity is necessary*/
 		background: none;
