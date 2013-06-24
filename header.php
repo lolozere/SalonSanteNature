@@ -25,6 +25,30 @@
 <link href='http://fonts.googleapis.com/css?family=Ropa+Sans' rel='stylesheet' type='text/css'>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
+
+<script type="text/javascript">
+startList = function() {
+if (document.all&&document.getElementById) {
+navRoot = document.getElementById("nav");
+for (i=0; i<navRoot.childNodes.length; i++) {
+node = navRoot.childNodes[i];
+if (node.nodeName=="LI") {
+node.onmouseover=function() {
+this.className+=" over";
+  }
+  node.onmouseout=function() {
+  this.className=this.className.replace
+        (" over", "");
+   }
+   }
+  }
+ }
+}
+window.onload=startList;
+</script>
+
+
+
 <?php // Loads HTML5 JavaScript file to add support for HTML5 elements in older IE versions. ?>
 <!--[if lt IE 9]>
 <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
@@ -33,25 +57,54 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
 
 <body <?php body_class(); ?>>
-<div id="page" class="hfeed site">
+
 	<header id="masthead" class="site-header" role="banner">
 		<hgroup>
 			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+ 
 			<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
 		</hgroup>
 
-		<nav id="site-navigation" class="main-navigation" role="navigation">
+		<div class="header-institutionnel">
+			<nav id="headermenu-institutionnel" class="menu-salon" role="navigation">
+				<a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to content', 'ssn' ); ?>"><?php _e( 'Skip to content', 'ssn' ); ?></a>
+				<?php wp_nav_menu( array( 'theme_location' => 'ssn-menu-institutionnel', 'menu_class' => 'nav-menu' ) ); ?>
+			</nav>
+		</div>
+        
+        
+        <nav id="site-navigation" class="main-navigation" role="navigation">
 			<?php /*?><h3 class="menu-toggle"><?php _e( 'Menu', 'twentytwelve' ); ?></h3>
 			<a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to content', 'twentytwelve' ); ?>"><?php _e( 'Skip to content', 'twentytwelve' ); ?></a>
 			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav-menu' ) ); ?><?php */?>
             
-            <ul>
-  <li><a href="#" class="liens2"><span>Découvrez le salon</span></a></li>
-  <li><a href="#" class="terragen2"><span>Les conférences</span></a></li>
-  <li><a href="#" class="animations2"><span>Le Pass Bien-être</span></a></li>
-  <li><a href="#" class="photonum2"><span>Liste des exposants</span></a></li>
-  <li><a href="#" class="plansite2"><span>Réservez votre stand</span></a></li>
- </ul>
+            <ul id="nav">
+	<li id="liSalon" class="on"><a class="menuprincipal" href="#"><span><?php _e( 'Découvrez le salon', 'ssn' ); ?></span></a>
+	<ul id="vert">
+		<li><?php wp_nav_menu( array( 'theme_location' => 'ssn-menu-salon-tour', 'menu_class' => 'nav-menu' ) ); ?></li>
+	</ul></li>
+	<li id="liConference" class="off"><a class="menuprincipal" href="#"><span>Conférences</span></a>
+	<ul id="bleu">
+		<li><a href="#">Conférence 2011 I</a></li>
+		<li><a href="#">Conférence 2012 I</a></li>
+		<li><a href="#">Conférence 2013</a></li>
+	</ul></li>
+	<li id="liPass" class="off"><a class="menuprincipal" href="#"><span>Pass Bien-être</span></a>
+	<ul id="orange">
+		<li><?php wp_nav_menu( array( 'theme_location' => 'ssn-menu-pass', 'menu_class' => 'nav-menu' ) ); ?></li>
+	</ul></li>
+	<li id="liExposant" class="off"><a class="menuprincipal" href="#"><span>Exposants</span></a>
+	<ul id="jaune" class="nav-menu">
+		<li class="menu-item"><a href="<?php echo get_permalink(SSN_PAGE_EXPOSANTS_ID);?>">Liste des exposants <?php echo $ssn_last_year;?></a></li>
+						<?php for($year=($ssn_last_year-1);$year>=($ssn_last_year-2);$year--) {?>
+						<li class="menu-item"><a href="<?php echo get_permalink(SSN_PAGE_EXPOSANTS_ID);?>?<?php echo $year;?>">Liste des exposants <?php echo $year;?></a></li>
+						<?php }?>
+	</ul></li>
+	<li id="liStand" class="off"><a class="menuprincipal" href="#"><span>Stand</span></a>
+	<ul id="rose">
+		<li><?php wp_nav_menu( array( 'theme_location' => 'ssn-menu-book-stand', 'menu_class' => 'nav-menu' ) ); ?></li>
+	</ul></li>
+</ul>
  
 		</nav><!-- #site-navigation -->
 
@@ -60,5 +113,5 @@
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo esc_url( $header_image ); ?>" class="header-image" width="<?php echo get_custom_header()->width; ?>" height="<?php echo get_custom_header()->height; ?>" alt="" /></a>
 		<?php endif; ?>
 	</header><!-- #masthead -->
-
+<div id="page" class="hfeed site">
 	<div id="main" class="wrapper">

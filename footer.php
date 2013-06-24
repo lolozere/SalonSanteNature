@@ -14,7 +14,13 @@
 	global $ssn_last_year, $ssn_years;
 	?>
 	</div><!-- #main .wrapper -->
+    
+    <img src="<?php echo get_template_directory_uri(); ?>/images/uneautreideedelavie.png" alt="Une autre idée de la vie" id="uneautreideedelavie"/>
+    </div><!-- #page -->
+    
 	<footer id="colophon" role="contentinfo">
+    
+        
 		<div class="footer-salon">
 			<nav id="footermenu-salon-tour" class="menu-salon" role="navigation">
 				<h3><?php _e( 'Découvrez le salon', 'ssn' ); ?></h3>
@@ -43,12 +49,14 @@
 					</ul>
 				</div>
 			</nav>
-			<nav id="footermenu-bookstand" class="menu-salon" role="navigation">
+			<nav id="footermenu-stand" class="menu-salon" role="navigation">
 				<h3><?php _e( 'Réservez votre stand', 'ssn' ); ?></h3>
 				<a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to content', 'ssn' ); ?>"><?php _e( 'Skip to content', 'ssn' ); ?></a>
 				<?php wp_nav_menu( array( 'theme_location' => 'ssn-menu-book-stand', 'menu_class' => 'nav-menu' ) ); ?>
 			</nav>
 		</div>
+        
+        
 		<div class="footer-institutionnel">
 			<nav id="footermenu-institutionnel" class="menu-salon" role="navigation">
 				<h3><?php _e( 'Menu institutionnel', 'ssn' ); ?></h3>
@@ -56,11 +64,13 @@
 				<?php wp_nav_menu( array( 'theme_location' => 'ssn-menu-institutionnel', 'menu_class' => 'nav-menu' ) ); ?>
 			</nav>
 		</div>
+        
+        
 		<div class="footer-credits">
-			© Un site Salon Santé Nature, réalisé par <a href="http://www.soletic.org">Sol&TIC</a> et propulsé par WordPress
+			© Un site Salon Santé Nature, réalisé par <a href="http://www.soletic.org">Sol&TIC</a> et propulsé par WordPress
 		</div>
 	</footer><!-- #colophon -->
-</div><!-- #page -->
+
 
 <?php wp_footer(); ?>
 </body>
