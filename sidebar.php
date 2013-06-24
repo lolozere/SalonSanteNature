@@ -25,7 +25,7 @@
 				dynamic_sidebar( 'sidebar-1' );
 			}
 			?>            
-            <aside id="widget_blog" class="widget_gauche">
+            <!-- <aside id="widget_blog" class="widget_gauche">
             
             	<div id="titre">
             	<img title="Actu Blog" src="<?php echo get_template_directory_uri(); ?>/images/actublog_titre.png" />
@@ -35,7 +35,7 @@
             	<p>Sortie du livre « Paroles de Nathanaël », le Feng Shui du corps par Georges Rafflin et Françoise Riu disponible au Salon Santé Nature</p><br/>
 					<a href= "#" title="lire la suite">>> Lire la suite >></a>
             	</div>
-            </aside>
+            </aside>  -->
         </div>
         
         
