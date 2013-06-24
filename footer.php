@@ -14,10 +14,13 @@
 	global $ssn_last_year, $ssn_years;
 	?>
 	</div><!-- #main .wrapper -->
+    
+    <img src="<?php echo get_template_directory_uri(); ?>/images/uneautreideedelavie.png" alt="Une autre idée de la vie" id="uneautreideedelavie"/>
     </div><!-- #page -->
+    
 	<footer id="colophon" role="contentinfo">
     
-    
+        
 		<div class="footer-salon">
 			<nav id="footermenu-salon-tour" class="menu-salon" role="navigation">
 				<h3><?php _e( 'Découvrez le salon', 'ssn' ); ?></h3>
