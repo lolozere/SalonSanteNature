@@ -24,14 +24,7 @@
 			<nav id="footermenu-conferences" class="menu-salon" role="navigation">
 				<h3><?php _e( 'Les conférences', 'ssn' ); ?></h3>
 				<a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to content', 'ssn' ); ?>"><?php _e( 'Skip to content', 'ssn' ); ?></a>
-				<div>
-					<ul class="nav-menu">
-						<li class="menu-item"><a href="<?php echo get_permalink(SSN_PAGE_CONFERENCES_ID);?>">Conférences <?php echo $ssn_last_year;?></a></li>
-						<?php for($year=($ssn_last_year-1);$year>=($ssn_last_year-2);$year--) {?>
-						<li class="menu-item"><a href="<?php echo get_permalink(SSN_PAGE_CONFERENCES_ID);?>?<?php echo $year;?>">Conférences <?php echo $year;?></a></li>
-						<?php }?>
-					</ul>
-				</div>
+				<?php wp_nav_menu( array( 'theme_location' => 'ssn-menu-conferences', 'menu_class' => 'nav-menu' ) ); ?>
 			</nav>
 			<nav id="footermenu-pass" class="menu-salon" role="navigation">
 				<h3><?php _e( 'Le Pass Bien-être', 'ssn' ); ?></h3>
