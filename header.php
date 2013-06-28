@@ -103,12 +103,10 @@ window.onload=startList;
 					<li id="liExposant" class="off">
 						<a class="menuprincipal" href="#"><span>Exposants</span></a>
 						<ul id="jaune" class="nav-menu">
-							<li class="menu-item">
-								<a href="<?php echo get_permalink(SSN_PAGE_EXPOSANTS_ID);?>">Liste des exposants <?php echo $ssn_last_year;?></a>
-							</li>
-							<?php for($year=($ssn_last_year-1);$year>=($ssn_last_year-2);$year--) {?>
-							<li class="menu-item"><a href="<?php echo get_permalink(SSN_PAGE_EXPOSANTS_ID);?>?<?php echo $year;?>">Liste des exposants <?php echo $year;?></a></li>
-							<?php }?>
+							<li class="menu-item"><a href="<?php echo get_permalink(SSN_PAGE_EXPOSANTS_ID);?>">Liste des exposants <?php echo $ssn_last_year;?></a></li>
+						<?php for($year=($ssn_last_year-1);$year>=($ssn_last_year-2);$year--) {?>
+						<li class="menu-item"><a href="<?php echo get_permalink(SSN_PAGE_EXPOSANTS_ID);?>?<?php echo $year;?>">Liste des exposants <?php echo $year;?></a></li>
+						<?php }?>
 						</ul>
 					</li>
 					<li id="liStand" class="off">

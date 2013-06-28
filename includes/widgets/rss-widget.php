@@ -35,6 +35,7 @@ if (class_exists('super_rss_reader_widget')) {
 			<div class="ssn-blog-widget">
 				<div class="title">
             		<img title="Actu Blog" src="'. get_template_directory_uri() .'/images/actublog_titre.png" />
+					<img title="Actu Blog" src="'. get_template_directory_uri() .'/images/arbre_blog.png" />
                 </div>
                 <div class="content">' . "\n";
 		

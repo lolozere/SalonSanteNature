@@ -130,7 +130,7 @@ hr {
 	background-color: #ccc;
 	border: 0;
 	height: 1px;
-	margin: 24px;
+	margin: 24px 0;
 	margin-bottom: 1.714285714rem;
 }
 sub,
@@ -1519,12 +1519,15 @@ article.format-quote .entry-content blockquote {
 .comments-area article {
 	margin: 24px 0;
 	margin: 1.714285714rem 0;
+	background-color:#f9f7f0;
+	padding:10px;
 }
 .comments-area article header {
-	margin: 0 0 48px;
-	margin: 0 0 3.428571429rem;
+	margin: 0 0 30px;
+	margin: 0 0 2.14285714rem;
 	overflow: hidden;
 	position: relative;
+	border-bottom: 1px solid #999;
 }
 .comments-area article header img {
 	float: left;
@@ -2114,11 +2117,11 @@ img#wpstats {
 	font-weight:normal;
 	}
 	
-h1#conference{
+/*h1#conference{
 	color: #555;
 	font-family: 'bebas_neueregular', Verdana, Geneva, sans-serif;
 	font-weight:normal;
-	}
+	}*/
 	
 h1#therapeutes{
 	color: #fb6e07;
@@ -2131,6 +2134,15 @@ h1#therapeutes{
 .entry-header#therapeutes .entry-title#therapeutes {
    color: #fb6e07; 
 }
+.content-conference h1{
+	color:#555;
+	}
+.content-pass h1{
+	color:#fa7c1f;
+	}
+.content-generic h1{
+	color:#e23371;
+	}
 
 h2{
 	color: #555;
@@ -2228,10 +2240,10 @@ list-style-type:none;
 }
 
 
-#secondary #widget_blog {
+#secondary .ssn-blog-widget {
 	border : 1px solid #ddd;
-	width: 210px;
-	margin:5px 0 10px 26px;
+	width: 240px;
+	margin:5px 0 0 5px;
 	-webkit-border-radius: 15px;
 	-moz-border-radius: 15px;
 	border-radius: 15px;
@@ -2253,25 +2265,28 @@ list-style-type:none;
 
 
 	}
-	
-#secondary #widget_blog #titre img{
-	overflow:hidden;
-	
-	}
-#secondary #widget_blog #titre {
-	margin-bottom:10px;
-	
-	}
-	
-#secondary #widget_blog #texte {
-	width:180px;
-	
-	}
+#secondary .ssn-blog-widget .content {
+	margin-top:10px;
+	font-size: 14px;
+	/*font-size: 1.28571429rem;*/
+	background-color: #f5f6d7;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	padding:10px 10px 5px;
+	font-style:italic;
+	border-top:1px solid #bbe232;
+	border-left:1px solid #bbe232;
 
-#secondary #widget_blog #texte a{
-	margin:0;
-	
 	}
+#secondary .ssn-blog-widget .content a:hover{
+	color:#e23371;
+	text-decoration:none;
+	}
+	
+aside.widget-plus{
+	margin-bottom:30px;}
+
 /*------------------------------*/
 /* WIDGETS EXPOSANTS ET THERAPEUTES */ 
 /*------------------------------*/
@@ -2288,11 +2303,12 @@ list-style-type:none;
 	letter-spacing:1px;
 	padding:3px;
 }
-.widget_exposants h3 {
+.widget_exposants h3, .widget_conférences h3  {
 	color: #3d121e;
 	background-color: #ffd403;
 }
-.widget_therapeutes h3 {
+.widget_therapeutes h3{
+	
 	color: #fff;
 	background-color: #e23371;
 }	
