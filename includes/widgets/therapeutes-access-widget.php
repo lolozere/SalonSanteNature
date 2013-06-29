@@ -29,7 +29,7 @@ class SSN_Widget_TherapeuteAccess_Image extends SSN_Image_Widget {
 	function get_defaults() {
 		return array(
 				'title' => "Thérapeutes",
-				'link' => "",
+				'link' => ssn_get_first_menu_item('ssn-menu-pass')->url,
 				'imageurl' => get_template_directory_uri() . '/images/widget_therapeutes.png',
 			);
 	}

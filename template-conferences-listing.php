@@ -28,7 +28,15 @@ get_header(); ?>
 					get_template_part( 'content', $post->post_type);
 				endwhile;
 			else:
-				get_template_part( 'content', 'none' );
+				?><header class="archive-header">
+					<h1 class="archive-title">
+						<?php echo sprintf(__('Conférences', 'ssn') . ' %s', $ssn_current_year); ?>
+					</h1>
+				</header>
+				<div class="entry-content">
+					<p><?php _e( "Aucune conférence encore référencée.", 'ssn' ); ?></p>
+				</div><!-- .entry-content -->
+				<?php
 			endif;
 			ssn_content_nav( 'nav-below' );
 

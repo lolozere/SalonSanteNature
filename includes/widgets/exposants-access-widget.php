@@ -29,7 +29,7 @@ class SSN_Widget_ExposantAccess_Image extends SSN_Image_Widget {
 	function get_defaults() {
 		return array(
 				'title' => "Exposants",
-				'link' => "",
+				'link' => get_permalink(SSN_PAGE_EXPOSANTS_ID),
 				'imageurl' => get_template_directory_uri() . '/images/widget_exposants.png',
 			);
 	}

@@ -29,7 +29,7 @@ class SSN_Widget_Newsletter_Image extends SSN_Image_Widget {
 	function get_defaults() {
 		return array(
 				'title' => "Newsletter",
-				'link' => "",
+				'link' => get_permalink(SSN_PAGE_NEWSLETTER),
 				'imageurl' => get_template_directory_uri() . '/images/widget_newsletter.png',
 			);
 	}

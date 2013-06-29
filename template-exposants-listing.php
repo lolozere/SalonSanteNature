@@ -18,17 +18,26 @@ get_header(); ?>
 			$wp_query = new WP_Query( $list_args );
 			
 			if ( $wp_query->have_posts() ) :?>
-			<header class="archive-header">
-				<h1 class="archive-title">
-					<?php echo sprintf(__('Liste des exposants', 'ssn') . ' %s', $ssn_current_year); ?>
-				</h1>
-			</header>
+				<header class="archive-header">
+					<h1 class="archive-title">
+						<?php echo sprintf(__('Liste des exposants', 'ssn') . ' %s', $ssn_current_year); ?>
+					</h1>
+				</header>
 				<?php while ( $wp_query->have_posts() ) :
 					$wp_query->the_post();
 					get_template_part( 'content', $post->post_type);
 				endwhile;
 			else:
-				get_template_part( 'content', 'none' );
+				?>
+				<header class="archive-header">
+					<h1 class="archive-title">
+						<?php echo sprintf(__('Liste des exposants', 'ssn') . ' %s', $ssn_current_year); ?>
+					</h1>
+				</header>
+				<div class="entry-content">
+					<p><?php _e( "Aucun exposant encore référencé.", 'ssn' ); ?></p>
+				</div><!-- .entry-content -->
+				<?php 
 			endif;
 			ssn_content_nav( 'nav-below' );
 

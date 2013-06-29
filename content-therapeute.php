@@ -53,7 +53,7 @@
 			}?>
 			<?php
 			if (!is_single()) {?>
-			<a href="<?php get_permalink();?>" class="more-link">Notre prestation sur le salon</a>
+			<a href="<?php the_permalink();?>" class="more-link">Notre prestation sur le salon</a>
 			<?php }?>
 		</footer><!-- .entry-meta -->
 	</article><!-- #post -->

@@ -29,7 +29,7 @@ class SSN_Widget_Invitation_Image extends SSN_Image_Widget {
 	function get_defaults() {
 		return array(
 				'title' => "Invitation gratuite",
-				'link' => "",
+				'link' => get_permalink(SSN_PAGE_INVITATION_GRATUITE),
 				'imageurl' => get_template_directory_uri() . '/images/widget_entreegratuite.png',
 			);
 	}

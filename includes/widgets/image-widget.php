@@ -18,6 +18,9 @@ abstract class SSN_Image_Widget extends SSN_Widget {
 	function widget( $args, $instance ) {
 		extract( $args );
 		extract( $instance );
+		$defaults = $this->get_defaults();
+		if (empty($link) && !empty($defaults['link']))
+			$link = $defaults['link'];
 		include( $this->getTemplateHierarchy( 'widget-image' ) );
 	}
 

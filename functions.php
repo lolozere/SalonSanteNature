@@ -32,6 +32,8 @@ if (!is_admin()) {
 define('SSN_PAGE_EXPOSANTS_ID', 3774);
 define('SSN_PAGE_THERAPEUTES_ID', 3830);
 define('SSN_PAGE_CONFERENCES_ID', 3843);
+define('SSN_PAGE_NEWSLETTER', 702);
+define('SSN_PAGE_INVITATION_GRATUITE', 2294);
 
 require_once(get_template_directory().'/includes/templating.php');
 
@@ -127,8 +129,8 @@ function ssn_scripts_styles() {
 	/*
 	 * Loads the Internet Explorer specific stylesheet.
 	 */
-	wp_enqueue_style( 'ssn-ie', get_template_directory_uri() . '/css/ie.css', array( 'ssn-style' ), '20121010' );
-	$wp_styles->add_data( 'ssn-ie', 'conditional', 'lt IE 9' );
+	//wp_enqueue_style( 'ssn-ie', get_template_directory_uri() . '/css/ie.css', array( 'ssn-style' ), '20121010' );
+	//$wp_styles->add_data( 'ssn-ie', 'conditional', 'lt IE 9' );
 }
 add_action( 'wp_enqueue_scripts', 'ssn_scripts_styles' );
 
@@ -303,7 +305,9 @@ add_action('wp_head', 'ssn_init_type_request');
 $ssn_is_rubrique_exposant = null;
 function is_rubrique_exposants() {
 	global $ssn_is_rubrique_exposant, $post;
-	if (empty($ssn_is_rubrique_exposant) && ((is_page() && get_queried_object_id() == SSN_PAGE_EXPOSANTS_ID) || (is_single() && $post->post_type == 'exposant'))) {
+	if ($_SERVER['REQUEST_URI'] == '/') {
+		$ssn_is_rubrique_exposant = false;
+	} elseif (empty($ssn_is_rubrique_exposant) && ((is_page() && get_queried_object_id() == SSN_PAGE_EXPOSANTS_ID) || (is_single() && $post->post_type == 'exposant'))) {
 		$ssn_is_rubrique_exposant = true;
 	} elseif (empty($ssn_is_rubrique_exposant)) {
 		global $wp_query;
@@ -314,7 +318,9 @@ function is_rubrique_exposants() {
 $ssn_is_rubrique_conferences = null;
 function is_rubrique_conferences() {
 	global $ssn_is_rubrique_conferences, $post;
-	if (empty($ssn_is_rubrique_conferences) && is_single() && $post->post_type == 'conference') {
+	if ($_SERVER['REQUEST_URI'] == '/') {
+		$ssn_is_rubrique_conferences = false;
+	} elseif (empty($ssn_is_rubrique_conferences) && is_single() && $post->post_type == 'conference') {
 		$ssn_is_rubrique_conferences = true;
 	} elseif (empty($ssn_is_rubrique_conferences)) {
 		$ssn_is_rubrique_conferences = false;
@@ -336,7 +342,9 @@ function is_rubrique_conferences() {
 $ssn_is_rubrique_bookstand = null;
 function is_rubrique_bookstand() {
 	global $ssn_is_rubrique_bookstand, $post;
-	if (empty($ssn_is_rubrique_bookstand)) {
+	if ($_SERVER['REQUEST_URI'] == '/') {
+		$ssn_is_rubrique_bookstand = false;
+	} elseif (empty($ssn_is_rubrique_bookstand)) {
 		$ssn_is_rubrique_bookstand = false;
 		$menu = wp_get_nav_menu_object( 'ssn-menu-book-stand' );
 		if ( ! $menu && ( $locations = get_nav_menu_locations() ) && isset( $locations[ 'ssn-menu-book-stand' ] ) ) {
@@ -359,7 +367,9 @@ function is_rubrique_bookstand() {
 $ssn_is_rubrique_pass = null;
 function is_rubrique_pass() {
 	global $ssn_is_rubrique_pass, $post;
-	if (empty($ssn_is_rubrique_pass) && ((is_page() && in_array(get_queried_object_id(), array(SSN_PAGE_THERAPEUTES_ID))) || (is_single() && $post->post_type == 'therapeute'))) {
+	if ($_SERVER['REQUEST_URI'] == '/') {
+		$ssn_is_rubrique_pass = false;
+	} elseif (empty($ssn_is_rubrique_pass) && ((is_page() && in_array(get_queried_object_id(), array(SSN_PAGE_THERAPEUTES_ID))) || (is_single() && $post->post_type == 'therapeute'))) {
 		$ssn_is_rubrique_pass = true;
 	} elseif (empty($ssn_is_rubrique_pass)) {
 		global $wp_query;
@@ -372,7 +382,10 @@ function is_rubrique_pass() {
 			if ( $menu && ! is_wp_error($menu) && !isset($menu_items) ) {
 				$menu_items = wp_get_nav_menu_items( $menu->term_id, array( 'update_post_term_cache' => false ) );
 				foreach($menu_items as $menu_item) {
+					//echo $_SERVER['REQUEST_URI'].'<br />';
+					//echo $menu_item->url.'<br />';
 					if (!(strpos($_SERVER['REQUEST_URI'], $menu_item->url) === false) || !(strpos($menu_item->url, $_SERVER['REQUEST_URI']) === false)) {
+						//echo "emr"; exit();
 						$ssn_is_rubrique_pass = true;
 					}
 				}
@@ -395,6 +408,30 @@ function ssn_get_class_content() {
 		return 'content-generic';
 	}
 }
+function ssn_get_class_header_navigation() {
+	if (is_rubrique_pass()) {
+		return 'header-pass';
+	} elseif (is_rubrique_conferences()) {
+		return 'header-conference';
+	} elseif (is_rubrique_exposants()) {
+		return 'header-exposant';
+	} elseif (is_rubrique_bookstand()) {
+		return 'header-stand';
+	} else {
+		return 'header-salon';
+	}
+}
+
+function ssn_get_first_menu_item($menu_theme_location) {
+	// Get the nav menu based on the theme_location
+	if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_theme_location ] ) ) {
+		$menu = wp_get_nav_menu_object( $locations[ $menu_theme_location ] );
+		$menu_items = wp_get_nav_menu_items( $menu->term_id, array( 'update_post_term_cache' => false ) );
+		return $menu_items[0];
+	}
+	return null;
+}
+
 
 
 if ( ! function_exists( 'ssn_content_nav' ) ) :

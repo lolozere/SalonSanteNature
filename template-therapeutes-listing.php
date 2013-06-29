@@ -28,7 +28,16 @@ get_header(); ?>
 					get_template_part( 'content', $post->post_type);
 				endwhile;
 			else:
-				get_template_part( 'content', 'none' );
+				?>
+				<header class="archive-header">
+					<h1 class="archive-title">
+						<?php echo sprintf(__('Pôle thérapeutes', 'ssn') . ' %s', $ssn_current_year); ?>
+					</h1>
+				</header>
+				<div class="entry-content">
+					<p><?php _e( "Aucun thérapeute encore référencé.", 'ssn' ); ?></p>
+				</div><!-- .entry-content -->
+				<?php 
 			endif;
 			ssn_content_nav( 'nav-below' );
 

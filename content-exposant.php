@@ -53,7 +53,7 @@
 			}?>
 			<?php
 			if (!is_single()) {?>
-			<a href="<?php get_permalink();?>" class="more-link">En savoir plus</a>
+			<a href="<?php echo get_permalink();?>" class="more-link">En savoir plus</a>
 			<?php }?>
 		</footer><!-- .entry-meta -->
 	</article><!-- #post -->

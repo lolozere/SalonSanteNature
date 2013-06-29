@@ -35,6 +35,7 @@ abstract class SSN_Widget extends WP_Widget {
 		} else {
 			$file = 'views/' . $template;
 		}
+		
 		return apply_filters( 'sp_template_image-widget_'.$template, $file);
 	}
 }
