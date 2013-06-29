@@ -46,7 +46,7 @@ wp_head();
 				if (('header-'+$(this).attr('data-rubrique')) == selected)
 					return;
 				// Links
-				$('#site-navigation-menu .menu-rubrique:not([class~="off"])').addClass('hidden');
+				$('#site-navigation-menu .menu-rubrique:not([class~="off"])').addClass('off');
 				$(this).removeClass('off');
 				// Background
 				if ($('#masthead').hasClass('header-'+$(this).attr('data-rubrique'))) {
@@ -55,15 +55,16 @@ wp_head();
 				$('#masthead').addClass('header-'+$(this).attr('data-rubrique'));
 				if ($('#masthead').hasClass(selected))
 					$('#masthead').removeClass(selected);
+				selected = 'header-'+$(this).attr('data-rubrique');
 			});
 			$(this).mouseout(function() {
-				if (('header-'+$(this).attr('data-rubrique')) == selected)
+				/*if (('header-'+$(this).attr('data-rubrique')) == selected)
 					return;
 				$(this).addClass('off');
 				if (!$('#masthead').hasClass(selected))
 					$('#masthead').addClass(selected);
 				$('#masthead').removeClass('header-'+$(this).attr('data-rubrique'));
-				$('#site-navigation-menu .menu-rubrique.hidden').removeClass('hidden');
+				$('#site-navigation-menu .menu-rubrique.hidden').removeClass('hidden');*/
 			});
 		})
 	})
