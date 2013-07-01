@@ -310,7 +310,7 @@ li.bypostauthor cite span {
 .entry-content img,
 .comment-content img,
 .widget img {
-	max-width: 100%; /* Fluid images for posts, comments, and widgets */
+	/* max-width: 100%; */ /* Fluid images for posts, comments, and widgets */
 }
 img[class*="align"],
 img[class*="wp-image-"],
@@ -321,8 +321,8 @@ img.size-full,
 img.size-large,
 img.header-image,
 img.wp-post-image {
-	max-width: 100%;
-	height: auto; /* Make sure images with WordPress-added height and width attributes are scaled correctly */
+	/* max-width: 100%;
+	height: auto;*/ /* Make sure images with WordPress-added height and width attributes are scaled correctly */
 }
 
 /* Make sure videos and embeds fit their containers */
@@ -330,10 +330,10 @@ embed,
 iframe,
 object,
 video {
-	max-width: 100%;
+	/* max-width: 100%; */
 }
 .entry-content .twitter-tweet-rendered {
-	max-width: 100% !important; /* Override the Twitter embed fixed width */
+	/* max-width: 100% !important; /* Override the Twitter embed fixed width */
 }
 
 /* Images */
@@ -359,7 +359,7 @@ img.wp-post-image {
 	/*box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);*/
 }
 .wp-caption {
-	max-width: 100%; /* Keep wide captions from overflowing their container. */
+	/* max-width: 100%; */ /* Keep wide captions from overflowing their container. */
 	padding: 4px;
 }
 .wp-caption .wp-caption-text,
@@ -394,7 +394,7 @@ img.wp-smiley,
 	display: inline;
 }
 .gallery-columns-1 .gallery-item a {
-	max-width: 100%;
+	/*max-width: 100%;*/
 	width: auto;
 }
 .gallery .gallery-icon img {
@@ -553,6 +553,7 @@ a:hover {
 	background-position: 50% 50%;
 	margin:0 auto;
 	position:relative;
+	min-width: 1200px;
 }
 .site-header-bg {
 	padding: 0;	padding: 0;
@@ -800,14 +801,12 @@ Footer modifié
 --------------------------*/
 
 footer[role="contentinfo"] {
+	min-width: 1200px;
 	clear: both;
 	font-size: 12px;
 	font-size: 0.857142857rem;
 	line-height: 2;
-	max-width: 100%;
-	/*max-width: 85.7142857rem;*/
 	margin-top: 0;
-	/*margin-top: 1.714285714rem;*/
 	margin-left: auto;
 	margin-right: auto;
 	padding:15px 0;
@@ -1291,7 +1290,7 @@ footer.entry-meta {
 	display: block;
 	height: auto;
 	margin: 0 auto;
-	max-width: 100%;
+	/*max-width: 100%;*/
 }
 .image-attachment .entry-caption {
 	margin-top: 8px;
@@ -1708,14 +1707,12 @@ img#wpstats {
 }
 .site {
 	margin: 0 auto;
-	max-width: 1200px;
-/*		max-width: 68.571428571rem;
-*/		overflow: hidden;
+	width: 1200px;
+	overflow: hidden;
 }
 .site-content {
 	float: left;
-	width: 50%;
-	
+	width: 600px;
 	/*border:1px solid #C6C;*/
 }
 body.template-front-page .site-content,
@@ -1725,12 +1722,12 @@ body.full-width .site-content {
 }
 .widget-area {
 	float: left;
-	width: 22.4%;
+	width: 268.8px;
 	/*border:1px solid #C6C;*/
 }
 .widget-area#troisieme {
 	float: right;
-	width: 24%;
+	width: 288px;
 	/*border:1px solid #C6C;*/
 }
 .site-header h1,
@@ -1852,7 +1849,7 @@ body.custom-background-white .site {
 		clear: both !important;
 		display: block !important;
 		float: none !important;
-		max-width: 100%;
+		/*max-width: 100%;*/
 		position: relative !important;
 	}
 	.site-header {
