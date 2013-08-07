@@ -20,7 +20,7 @@ get_header(); ?>
 			if ( $wp_query->have_posts() ) :?>
 			<header class="archive-header">
 				<h1 class="archive-title">
-					<?php echo sprintf(__('Pôle thérapeutes', 'ssn') . ' %s', $ssn_current_year); ?>
+					<?php echo sprintf(__('Pôle thérapie / Bien-être', 'ssn') . ' %s', $ssn_current_year); ?>
 				</h1>
 			</header>
 				<?php while ( $wp_query->have_posts() ) :
@@ -31,7 +31,7 @@ get_header(); ?>
 				?>
 				<header class="archive-header">
 					<h1 class="archive-title">
-						<?php echo sprintf(__('Pôle thérapeutes', 'ssn') . ' %s', $ssn_current_year); ?>
+						<?php echo sprintf(__('Pôle thérapie / Bien-être', 'ssn') . ' %s', $ssn_current_year); ?>
 					</h1>
 				</header>
 				<div class="entry-content">

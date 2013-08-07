@@ -540,7 +540,7 @@ a:hover {
 }
 .widget-area {
 	margin: 24px 0 0;
-	margin: 1.714285714rem 0 0;
+	margin: 1rem 0 0;
 }
 
 /* Header */
@@ -616,32 +616,23 @@ a:hover {
 
 /* Navigation Menu */
 .main-navigation {
-	background: transparent url(images/menu3.jpg) no-repeat top left;
+	background: transparent url(images/menu3.jpg) no-repeat 0 -3px;
 	padding: 0;
-	height: 97px;
+	height: 132px;
 	width: 925px;
 	top:218px;
 	left: 285px;
 	position:absolute;
 
 }
-.main-navigation ul.nav-menu,
-.main-navigation div.nav-menu > ul {
-}
-.main-navigation ul.nav-menu.toggled-on,
-.menu-toggle {
-	display: inline-block;
-}
-/*--------------------- Surcharge Menu -----------------------*/
 #site-navigation-menu {
 	position: relative;	top: 0;
-	height: 132px;
-	width: 925px;
-	height: 97px;
+	height: 132px; width: 925px;
 }
 #site-navigation-menu ul, #site-navigation-menu li { margin: 0; padding: 0; }
 #site-navigation-menu li { position: relative; float: left; }
-#site-navigation-menu a { display: block; text-decoration: none; padding: 0; margin: 0; }
+#site-navigation-menu a { display: block; text-decoration: none; padding: 0; margin: 0; font-size: 1.1em; }
+
 #site-navigation-menu li.menu-rubrique {
 	height: 100%; position: absolute; left: 0; z-index: 0;
 }
@@ -652,6 +643,7 @@ a:hover {
 	background-repeat: no-repeat; background-position: center bottom;
 	height: 98px; width: 185px;
 	position: absolute; left: 0;
+
 }
 #site-navigation-menu .menuprincipal-links { 
 	position: relative; height: 34px; top: 98px; line-height: 34px; vertical-align: middle; 
@@ -660,13 +652,15 @@ a:hover {
 #site-navigation-menu .menuprincipal-links a {
 	border: 0; float: left; /*ie doesn't inherit the float*/
 	width: auto; color: #000;
-	margin-right: 15px;
+	margin-right: 20px;
+	margin-left: 5px;
 }
 #site-navigation-menu .off .menuprincipal-links { display: none; }
 #site-navigation-menu .hidden .menuprincipal-links { display: none; }
-#site-navigation-menu .menuprincipal-links a:hover { font-weight: bold; }
-#site-navigation-menu .menuprincipal-links a:after {	content: " |"; color: #fff; font-size: 0.8em;  }
-#site-navigation-menu .menuprincipal-links a:before { content: "| "; color: #fff; font-size: 0.8em; }
+#site-navigation-menu .menuprincipal-links a:hover  { font-weight: bold; }
+#site-navigation-menu .menuprincipal-links a:active  { font-weight: bold; }
+/*#site-navigation-menu .menuprincipal-links a:after {	content: " |"; color: #fff; font-size: 0.8em;  }
+#site-navigation-menu .menuprincipal-links a:before { content: "| "; color: #fff; font-size: 0.8em; }*/
 
 /*do the image replacement*/
 #site-navigation-menu .menuprincipal span { position: absolute; left: -10000px; }
@@ -685,9 +679,9 @@ a:hover {
 
 .header-salon #liSalon a.menuprincipal { background-image: url(images/salon_hover.jpg); }
 .header-conference #liConference a.menuprincipal { background-image: url(images/conferences_hover.jpg); }
-.header-pass #liPass a.menuprincipal:hover {	background-image: url(images/pass_hover.jpg); }
-.header-exposant #liExposant a.menuprincipal:hover{	background-image: url(images/exposants_hover.jpg); }
-.header-stand #liStand a.menuprincipal:hover { background-image: url(images/stand_hover.jpg); }
+.header-pass #liPass a.menuprincipal {	background-image: url(images/pass_hover.jpg); }
+.header-exposant #liExposant a.menuprincipal {	background-image: url(images/exposants_hover.jpg); }
+.header-stand #liStand a.menuprincipal { background-image: url(images/stand_hover.jpg); }
 
 .site-header.header-salon .site-header-bg {
 	background-image: url(images/header_salon.png);
@@ -727,16 +721,24 @@ a:hover {
 	background: none;
 }
 /*---------menu institutionnel-------------*/
+/* Social */
+#social_btn {
+	width:100px;
+	position:absolute;
+	top:183px;
+	left:1150px;
+}
+
 .header-institutionnel{
-	width:925px;
+	width:900px;
 	position:absolute;
 	top:190px;
-	left:310px;
+	left:300px;
 }
 #headermenu-institutionnel .menu-item{
 	display:inline;
-	font-size:18px;
-	margin-right:40px;
+	font-size:17px;
+	margin-right:35px;
 	font-family: 'Ropa Sans', sans-serif;
 }
 #headermenu-institutionnel .menu-item a{
@@ -801,12 +803,14 @@ Footer modifié
 --------------------------*/
 
 footer[role="contentinfo"] {
-	min-width: 1200px;
 	clear: both;
 	font-size: 12px;
 	font-size: 0.857142857rem;
 	line-height: 2;
+	/*max-width: 100%;*/
+	/*max-width: 85.7142857rem;*/
 	margin-top: 0;
+	/*margin-top: 1.714285714rem;*/
 	margin-left: auto;
 	margin-right: auto;
 	padding:15px 0;
@@ -1221,8 +1225,8 @@ img.aligncenter {
 }
 .site-content article {
 	border-bottom: 4px double #ededed;
-	margin-bottom: 72px;
-	margin-bottom: 5.142857143rem;
+	margin-bottom: 22px;
+	/*margin-bottom: 5.142857143rem;*/
 	padding-bottom: 24px;
 	padding-bottom: 1.714285714rem;
 	word-wrap: break-word;
@@ -1797,7 +1801,7 @@ body.full-width .site-content {
 }
 
 body {
-	background-color: #e6e6e6;
+	background-color: #fff;
 }
 body .site {
 	padding: 20px 40px 0;
@@ -1960,13 +1964,13 @@ body.custom-background-white .site {
 	font-weight:normal;
 	}
 	
-/*h1#conference{
+h1#conference{
 	color: #555;
 	font-family: 'bebas_neueregular', Verdana, Geneva, sans-serif;
 	font-weight:normal;
-	}*/
+	}
 	
-h1#therapeutes{
+h1#therapeutes, h1#therapeutes a{
 	color: #fb6e07;
 	font-family: 'bebas_neueregular', Verdana, Geneva, sans-serif;
 	font-weight:normal;
@@ -1978,10 +1982,20 @@ h1#therapeutes{
    color: #fb6e07; 
 }
 .content-conference h1{
-	color:#555;
+	/*color:#555;*/
+	color: #fff;
+	background-color: #00c4ff;
+	font-family: 'bebas_neueregular', Verdana, Geneva, sans-serif;
+	font-weight:normal;
+	display : inline ;
+	padding:3px;
+	
 	}
-.content-pass h1{
+.content-pass h1, .content-pass h1 a{
 	color:#fa7c1f;
+	}
+.content-pass h1 a:hover{
+	color:#ccc;
 	}
 .content-generic h1{
 	color:#e23371;
@@ -1992,12 +2006,15 @@ h2{
 	font-family: 'bebas_neueregular', Verdana, Geneva, sans-serif;
 	font-weight:normal;
 	}
+	
 h2#conference{
-	color: #fff;
+	color:#555;
+	font-family: Helvetica, Arial, sans-serif;
+	/*color: #fff;
 	background-color: #00c4ff;
 	font-family: 'bebas_neueregular', Verdana, Geneva, sans-serif;
 	font-weight:normal;
-	display : inline ;
+	display : inline ;*/
 	}
 
 blockquote {
@@ -2039,7 +2056,7 @@ color: #383838;
 ul#accolade:before {
 display: block;
 content: "\007B";
-font-size: 80px;
+font-size: 95px;
 position: absolute;
 left: -15px;
 top: -20px;
@@ -2150,11 +2167,8 @@ aside.widget-plus{
 	color: #3d121e;
 	background-color: #ffd403;
 }
-.widget_therapeutes h3{
-	
-	color: #fff;
-	background-color: #e23371;
-}	
+
+/* Themes */
 .widget_themes ul li a, .widget_by_name ul li a {
 	color: #555;
 	font-family: 'Ropa Sans', sans-serif;
@@ -2166,6 +2180,23 @@ aside.widget-plus{
 .widget_by_name ul li {
 	list-style-type:circle;
 	margin-left:10px;
+}
+
+/* Widget themes therapeutes */
+.widget_therapeutes h3{
+	color: #3d121e;
+	background-color: #d5e300;
+}
+#secondary .widget_therapeutes {
+    background: linear-gradient(to right, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) repeat scroll 0 0 transparent;
+    border: 1px solid #DDDDDD;
+    border-radius: 15px 15px 15px 15px;
+    margin: 5px 0 2em 5px;
+    padding: 10px;
+    width: 240px;
+}
+#secondary .widget_therapeutes h3 {
+	background-color: transparent; color: #FB7C1F; line-height: 28px;
 }
 
 /*liste des articles
@@ -2185,6 +2216,7 @@ h1.archive-title, .fiche-title{
 	font-size: 30px;
 	font-weight:normal;
 	color:#e23371;
+	
 	}
 	
 .site-content .exposants-list .entry-header h1.entry-title{
@@ -2259,13 +2291,23 @@ article footer.entry-meta a.more-link:hover{
 }	
 	
 	
+td a{
+	font-weight:bold;
+	color:#333;
+	
+	}	
 	
 	
-	
-	
-	
-	
-	
+.nav-previous a, .nav-next a{
+	display:inline;
+	padding:5px;
+	background-color: #D5E300;
+    color: #3D121E;
+}
+.nav-previous a:hover, .nav-next a:hover{
+	background-color: #3D121E;
+    color: #D5E300;
+}
 	
 	
 	

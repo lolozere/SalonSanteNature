@@ -14,7 +14,7 @@
 		<?php endif; ?>
 		<header class="entry-header">
 			<?php if ( is_single() ) : ?>
-			<strong class="fiche-title">Conférence <?php echo ssn_get_last_year();?></strong>
+			<strong class="fiche-title">Conférence <?php echo ssn_get_last_year();?></strong><br/><br/>
 			<h1 class="entry-title"><?php the_title(); ?></h1>
 			<?php else : ?>
 			<h1 class="entry-title">

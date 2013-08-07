@@ -62,13 +62,13 @@
 				<h3><?php _e( 'Menu institutionnel', 'ssn' ); ?></h3>
 				<a class="assistive-text" href="#content" title="<?php esc_attr_e( 'Skip to content', 'ssn' ); ?>"><?php _e( 'Skip to content', 'ssn' ); ?></a>
 				<?php wp_nav_menu( array( 'theme_location' => 'ssn-menu-institutionnel', 'menu_class' => 'nav-menu' ) ); ?>
+                <a href="http://www.salon-sante-nature.fr/une-autre-idee-de-la-vie/" style="color:#e23371">Une autre idée de la vie</a>
 			</nav>
 		</div>
         
         
 		<div class="footer-credits">
-			© Un site Salon Santé Nature, réalisé par <a href="http://www.soletic.org">Sol&TIC</a> et propulsé par WordPress - Mentions légales
-		</div>
+		© Un site Salon Santé Nature, réalisé par <a href="http://www.soletic.org">Sol&TIC</a> et propulsé par WordPress - <a href="http://www.salon-sante-nature.fr/mentions-legales/">Mentions légales</a></div>
 	</footer><!-- #colophon -->
 
 

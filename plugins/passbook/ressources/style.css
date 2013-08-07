@@ -1,0 +1,38 @@
+/* global */
+.widget_passbook_availability h3.widget-title { background-color: #FA7C1F; color: #fff; }
+.passbook-availability * { 
+	color: #555555;
+    font-family: 'Ropa Sans',sans-serif;
+    font-size: 16px;
+}
+.passbook-availability p { margin-bottom: 0.5em; margin-top: 0.5em; }
+.passbook-availability a { color: #00C4FF; text-decoration: underline; }
+.passbook-availability a { color: #00C4FF; text-decoration: none; }
+.passbook-availability table td { border: 1px solid #fff; }
+.passbook-availability table td { padding: 2px; }
+
+/* by section */
+.passbook_availability { margin-bottom: 0.5em; font-size: 1.15em; }
+.passbook_availability_day { font-style: italic; font-size: 1.07em; color: #FA7C1F; }
+.passbook_availability_notice.open { background-color: green; }
+.passbook_availability_notice.full { background-color: red; }
+	
+/* SCROLL CONTROL */
+.scroll {
+	position: relative; margin: 0; padding: 0; overflow: hidden;
+}
+.scroll .scroll-inner {
+	position: relative; margin: 0; padding: 0; z-index: 1;
+	left: 20px;
+}
+.scroll .scroll-control {
+	position: absolute; top: 10px; margin: 0; padding: 0 0 0 0; z-index: 2; left: 0px;
+}
+.scroll .scroll-control i { display: block; width: 16px; height: 16px; } 
+.scroll .scroll-control .icon-arrow-down {
+	background-image: url(fleche-bas.png); 
+}
+.scroll .scroll-control .icon-arrow-up {
+	background-image: url(fleche-haut.png); margin-bottom: 2px;
+}
+.scroll .scroll-control > * { display: block; }

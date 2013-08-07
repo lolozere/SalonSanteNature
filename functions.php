@@ -131,6 +131,9 @@ function ssn_scripts_styles() {
 	 */
 	//wp_enqueue_style( 'ssn-ie', get_template_directory_uri() . '/css/ie.css', array( 'ssn-style' ), '20121010' );
 	//$wp_styles->add_data( 'ssn-ie', 'conditional', 'lt IE 9' );
+	
+	// Scripts
+	wp_enqueue_script( 'ssn-navigation', get_template_directory_uri() . '/js/navigation.js' );
 }
 add_action( 'wp_enqueue_scripts', 'ssn_scripts_styles' );
 
@@ -614,6 +617,7 @@ require_once(get_template_directory().'/includes/widgets/exposants-list-widget.p
 require_once(get_template_directory().'/includes/widgets/therapeutes-list-widget.php');
 require_once(get_template_directory().'/includes/widgets/conferences-list-widget.php');
 require_once(get_template_directory().'/includes/widgets/rss-widget.php');
+require_once(get_template_directory().'/plugins/passbook/widget/passbook-eventproduct-availability.php');
 
 function ssn_comment_form( $args = array(), $post_id = null ) {
 	global $id;

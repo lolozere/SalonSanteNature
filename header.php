@@ -34,43 +34,6 @@ global $ssn_last_year, $ssn_years;
 <?php 
 wp_head(); 
 ?>
-<!--[if !(IE 7) | !(IE 8)  ]><!-->
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<script type="text/javascript">
-!function ($) {
-	$(document).ready(function() {
-		var selected = '<?php echo ssn_get_class_header_navigation();?>';
-		$('#site-navigation-menu .menu-rubrique').each(function() {
-			// Mouse
-			$(this).mouseover(function() {
-				if (('header-'+$(this).attr('data-rubrique')) == selected)
-					return;
-				// Links
-				$('#site-navigation-menu .menu-rubrique:not([class~="off"])').addClass('off');
-				$(this).removeClass('off');
-				// Background
-				if ($('#masthead').hasClass('header-'+$(this).attr('data-rubrique'))) {
-					return;
-				}
-				$('#masthead').addClass('header-'+$(this).attr('data-rubrique'));
-				if ($('#masthead').hasClass(selected))
-					$('#masthead').removeClass(selected);
-				selected = 'header-'+$(this).attr('data-rubrique');
-			});
-			$(this).mouseout(function() {
-				/*if (('header-'+$(this).attr('data-rubrique')) == selected)
-					return;
-				$(this).addClass('off');
-				if (!$('#masthead').hasClass(selected))
-					$('#masthead').addClass(selected);
-				$('#masthead').removeClass('header-'+$(this).attr('data-rubrique'));
-				$('#site-navigation-menu .menu-rubrique.hidden').removeClass('hidden');*/
-			});
-		})
-	})
-}(window.jQuery);
-</script>
-<!--<![endif]-->
 </head>
 <body <?php body_class(); ?>>
 
@@ -87,9 +50,15 @@ wp_head();
 						<?php wp_nav_menu( array( 'theme_location' => 'ssn-menu-institutionnel', 'menu_class' => 'nav-menu' ) ); ?>
 					</nav>
 				</div>
+                <div id="social_btn">
+                <a href="https://www.facebook.com/SALON.SANTE.NATURE?fref=ts"><img src="<?php echo get_template_directory_uri(); ?>/images/facebook.png" alt="facebook" title="suivez-nous sur facebook" /></a>
+                <a href="https://plus.google.com/104156860937284771144/posts?hl=fr"><img src="<?php echo get_template_directory_uri(); ?>/images/google.png" alt="google+" title="suivez-nous sur google+" /></a>
+                <a href="https://twitter.com/SalonSanteNatur"><img src="<?php echo get_template_directory_uri(); ?>/images/twitter.png" alt="twitter" title="suivez-nous sur twitter" /></a>
+
+                </div>
 		        <nav id="site-navigation" class="main-navigation" role="navigation">
 		            <ul id="site-navigation-menu">
-						<li id="liSalon" class="menu-rubrique <?php echo (is_rubrique_bookstand()||is_rubrique_conferences()||is_rubrique_pass()||is_rubrique_exposants())?'off':'';?>" data-rubrique="salon">
+						<li id="liSalon" class="menu-rubrique <?php echo (is_rubrique_bookstand()||is_rubrique_conferences()||is_rubrique_pass()||is_rubrique_exposants())?'off':'default';?>" data-rubrique="salon">
 							<a class="menuprincipal" href="<?php echo ssn_get_first_menu_item('ssn-menu-salon-tour')->url;?>">
 								<span><?php _e( 'Découvrez le salon', 'ssn' ); ?></span>
 							</a>
@@ -97,7 +66,7 @@ wp_head();
 								<li><?php wp_nav_menu( array( 'theme_location' => 'ssn-menu-salon-tour', 'menu_class' => 'nav-menu' ) ); ?></li>
 							</ul>
 						</li>
-						<li id="liConference" class="menu-rubrique  <?php echo (!is_rubrique_conferences())?'off':'';?>" data-rubrique="conference">
+						<li id="liConference" class="menu-rubrique  <?php echo (!is_rubrique_conferences())?'off':'default';?>" data-rubrique="conference">
 							<a class="menuprincipal" href="<?php echo ssn_get_first_menu_item('ssn-menu-conferences')->url;?>">
 								<span>Conférences</span>
 							</a>
@@ -107,13 +76,13 @@ wp_head();
 								</li>
 							</ul>
 						</li>
-						<li id="liPass" class="menu-rubrique <?php echo (!is_rubrique_pass())?'off':'';?>" data-rubrique="pass">
+						<li id="liPass" class="menu-rubrique <?php echo (!is_rubrique_pass())?'off':'default';?>" data-rubrique="pass">
 							<a class="menuprincipal" href="<?php echo ssn_get_first_menu_item('ssn-menu-pass')->url;?>"><span>Pass Bien-être</span></a>
 							<ul id="orange" class="menuprincipal-links">
 								<li><?php wp_nav_menu( array( 'theme_location' => 'ssn-menu-pass', 'menu_class' => 'nav-menu' ) ); ?></li>
 							</ul>
 						</li>
-						<li id="liExposant" class="menu-rubrique <?php echo (!is_rubrique_exposants())?'off':'';?>" data-rubrique="exposant">
+						<li id="liExposant" class="menu-rubrique <?php echo (!is_rubrique_exposants())?'off':'default';?>" data-rubrique="exposant">
 							<a class="menuprincipal" href="<?php echo get_permalink(SSN_PAGE_EXPOSANTS_ID);?>"><span>Exposants</span></a>
 							<ul id="jaune" class="menuprincipal-links">
 								<li>
@@ -143,3 +112,4 @@ wp_head();
 	</header><!-- #masthead -->
 <div id="page" class="hfeed site">
 	<div id="main" class="wrapper">
+	<p id="mouse_position1"></p><p id="mouse_position2"></p>

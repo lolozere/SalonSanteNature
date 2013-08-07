@@ -10,7 +10,7 @@
  */
 ?>
 	<?php 
-	if ( is_active_sidebar( 'contentplus' ) && !ssn_is_full_page() && !ssn_is_two_columns()) : ?>
+	if ( !ssn_is_full_page() && !ssn_is_two_columns()) : ?>
 		<div id="troisieme" class="widget-area" role="complementary">
 			<?php 
 			if (is_front_page()) {
