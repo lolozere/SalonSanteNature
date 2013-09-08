@@ -6,7 +6,7 @@
 		var panel = $('#passbook-availability_<?php echo $id;?>');
 		// Get data
 		var url_proxy = '<? echo get_template_directory_uri();?>/plugins/passbook/proxy.php';
-		var request = '<?php echo $api_url;?>/availability?url='+escape(document.location.href);
+		var request = '<?php echo $api_url;?>/availability?animationsId=<?php echo rawurlencode($animationsId);?>';
 		$.getJSON(url_proxy, { csurl: request },  function(data) {
 				var availability = data;
 				
