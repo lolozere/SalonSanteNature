@@ -29,7 +29,7 @@ global $ssn_last_year, $ssn_years;
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 <?php // Loads HTML5 JavaScript file to add support for HTML5 elements in older IE versions. ?>
 <!--[if lt IE 9]>
-<script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/html5.js?<?php echo SSN_VERSION;?>" type="text/javascript"></script>
 <![endif]-->
 <?php 
 wp_head(); 
@@ -89,10 +89,10 @@ wp_head();
 									<div class="menu-exposant-container">
 										<ul class="nav-menu">
 											<li class="menu-item menu-item-type-post_type menu-item-object-page">
-												<a href="<?php echo get_permalink(SSN_PAGE_EXPOSANTS_ID);?>">Liste des exposants <?php echo $ssn_last_year;?></a>
+												<a href="/exposants/">Liste des exposants <?php echo $ssn_last_year;?></a>
 											</li>
 											<?php for($year=($ssn_last_year-1);$year>=($ssn_last_year-2);$year--) {?>
-											<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="<?php echo get_permalink(SSN_PAGE_EXPOSANTS_ID);?>?<?php echo $year;?>">Liste des exposants <?php echo $year;?></a></li>
+											<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/exposants/<?php echo $year;?>/">Liste des exposants <?php echo $year;?></a></li>
 											<?php }?>
 										</ul>
 									</div>

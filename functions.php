@@ -3,6 +3,8 @@
  * SSN functions and definitions.
  */
 
+define('SSN_VERSION', '2013.1');
+
 /**
  * Sets up the content width value based on the theme's design and stylesheet.
  */
@@ -67,6 +69,8 @@ function ssn_setup() {
 	// This theme uses a custom image size for featured images, displayed on "standard" posts.
 	add_theme_support( 'post-thumbnails' );
 	set_post_thumbnail_size( 624, 9999 ); // Unlimited height, soft crop
+	
+	wp_register_script('jquery-scroll', get_template_directory_uri() . '/js/jquery.scrollbox.js', array('jquery-ui-widget'), SSN_VERSION);
 }
 add_action( 'after_setup_theme', 'ssn_setup' );
 
@@ -124,7 +128,7 @@ function ssn_scripts_styles() {
 	/*
 	 * Loads our main stylesheet.
 	 */
-	wp_enqueue_style( 'ssn-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'ssn-style', get_stylesheet_uri(), array(), SSN_VERSION);
 
 	/*
 	 * Loads the Internet Explorer specific stylesheet.
@@ -133,7 +137,7 @@ function ssn_scripts_styles() {
 	//$wp_styles->add_data( 'ssn-ie', 'conditional', 'lt IE 9' );
 	
 	// Scripts
-	wp_enqueue_script( 'ssn-navigation', get_template_directory_uri() . '/js/navigation.js' );
+	wp_enqueue_script( 'ssn-navigation', get_template_directory_uri() . '/js/navigation.js', array(), SSN_VERSION );
 }
 add_action( 'wp_enqueue_scripts', 'ssn_scripts_styles' );
 
@@ -307,10 +311,10 @@ add_action('wp_head', 'ssn_init_type_request');
  */
 $ssn_is_rubrique_exposant = null;
 function is_rubrique_exposants() {
-	global $ssn_is_rubrique_exposant, $post;
+	global $ssn_is_rubrique_exposant, $post, $wp_query;
 	if ($_SERVER['REQUEST_URI'] == '/') {
 		$ssn_is_rubrique_exposant = false;
-	} elseif (empty($ssn_is_rubrique_exposant) && ((is_page() && get_queried_object_id() == SSN_PAGE_EXPOSANTS_ID) || (is_single() && $post->post_type == 'exposant'))) {
+	} elseif (empty($ssn_is_rubrique_exposant) && ((is_archive() && !empty($wp_query->query_vars['post_type']) && $wp_query->query_vars['post_type'] == 'exposant') || (is_single() && $post->post_type == 'exposant'))) {
 		$ssn_is_rubrique_exposant = true;
 	} elseif (empty($ssn_is_rubrique_exposant)) {
 		global $wp_query;
@@ -369,10 +373,10 @@ function is_rubrique_bookstand() {
  */
 $ssn_is_rubrique_pass = null;
 function is_rubrique_pass() {
-	global $ssn_is_rubrique_pass, $post;
+	global $ssn_is_rubrique_pass, $post, $wp_query;
 	if ($_SERVER['REQUEST_URI'] == '/') {
 		$ssn_is_rubrique_pass = false;
-	} elseif (empty($ssn_is_rubrique_pass) && ((is_page() && in_array(get_queried_object_id(), array(SSN_PAGE_THERAPEUTES_ID))) || (is_single() && $post->post_type == 'therapeute'))) {
+	} elseif (empty($ssn_is_rubrique_pass) && ((is_archive() && !empty($wp_query->query_vars['post_type']) && $wp_query->query_vars['post_type'] == 'therapeute') || (is_single() && $post->post_type == 'therapeute'))) {
 		$ssn_is_rubrique_pass = true;
 	} elseif (empty($ssn_is_rubrique_pass)) {
 		global $wp_query;
@@ -435,7 +439,23 @@ function ssn_get_first_menu_item($menu_theme_location) {
 	return null;
 }
 
-
+// Filter to add year of pagenum link
+/*add_filter('get_pagenum_link', 'ssn_pagenum_link_add_year');
+function ssn_pagenum_link_add_year($result) {
+	if (is_rubrique_exposants() || is_rubrique_pass() || is_rubrique_conferences()) {
+		global $ssn_current_year, $ssn_last_year;
+		$year = null;
+		if (!empty($ssn_current_year)) {
+			$year = $ssn_current_year;
+		} else {
+			$year = $ssn_last_year;
+		}
+		if (preg_match('/\?'.$year.'/', $result) === false) {
+			return $result . '?' . $year;
+		}
+	}
+	return $result;
+}*/
 
 if ( ! function_exists( 'ssn_content_nav' ) ) :
 /**
@@ -710,14 +730,21 @@ function ssn_fiche_alphabetical( $orderby ) {
 		return "post_title ASC";
 	return $orderby;
 }
-add_action('pre_get_posts', 'ssn_fiche_filter_by_year' );
+
 function ssn_fiche_filter_by_year( $wp_query ) {
-	global $ssn_current_year, $ssn_last_year;
+	if (is_admin()) {
+		return;
+	}
+	if (is_archive() && $wp_query->query_vars['post_type'] != 'nav_menu_item') {
+		$wp_query->set('meta_key', SSN_FICHE_META_PREFIX.'year_'.ssn_get_current_year());
+		$wp_query->set('meta_value', '1');
+	}
+	
 	/*
 	 * Pour une raison inconnue, Wordpress ne détectete par les URLS commençant par therapeutes-par-themes
 	* On fait le rewirting nous-même
 	*/
-	if (preg_match('/'.__('therapeutes\-par\-themes').'/', $_SERVER['REQUEST_URI']) && !empty($wp_query->query_vars['category_name'])) {
+	/*if (preg_match('/'.__('therapeutes\-par\-themes').'/', $_SERVER['REQUEST_URI']) && !empty($wp_query->query_vars['category_name'])) {
 		$wp_query->set('tpeute_theme', $wp_query->get('category_name'));
 		$wp_query->set('taxonomy', 'tpeute_theme');
 		$wp_query->set('term', $wp_query->get('tpeute_theme'));
@@ -737,17 +764,9 @@ function ssn_fiche_filter_by_year( $wp_query ) {
 		$wp_query->set('name', $wp_query->get('category_name'));
 		$wp_query->set('category_name', '');
 		$wp_query->is_single = true; $wp_query->is_archive = false; $wp_query->is_category = false;
-	}
-	/*
-	 * Cas normal...
-	 */
-	if (is_archive() && !is_admin()) {
-		$year = (!empty($ssn_current_year))?$ssn_current_year:$ssn_last_year;
-		global $wp_query;
-		$wp_query->set('meta_key', SSN_FICHE_META_PREFIX.'year_'.$year);
-		$wp_query->set('meta_value', '1');
-	}
+	}*/
 }
+add_action('pre_get_posts', 'ssn_fiche_filter_by_year' );
 
 /**
  * Display or retrieve the HTML list of a theme by taxonomy
@@ -755,7 +774,7 @@ function ssn_fiche_filter_by_year( $wp_query ) {
  * @param string $taxonomy
  */
 function ssn_list_themes($taxonomy) {
-	global $ssn_current_year, $ssn_last_year;
+	global $ssn_last_year;
 	$r = array(
 			'show_option_all' => true, 'show_option_none' => false,
 			'orderby' => 'name', 'order' => 'ASC',
@@ -771,14 +790,10 @@ function ssn_list_themes($taxonomy) {
 	);
 	
 	// Year
-	$ssn_year = $ssn_last_year;
-	if (is_single()) {
-		$ssn_year = (is_null($year_found = ssn_get_last_year()))?$ssn_year:$year_found;
-	} elseif (!empty($ssn_current_year))
-		$ssn_year = $ssn_current_year;
+	$ssn_year = ssn_get_current_year();
 	$request_uri_get_year = null;
 	if ($ssn_year != $ssn_last_year)
-		$request_uri_get_year = '?'.$ssn_year;
+		$request_uri_get_year = $ssn_year;
 	
 	if ( !isset( $r['pad_counts'] ) && $r['show_count'] && $r['hierarchical'] )
 		$r['pad_counts'] = true;
@@ -821,13 +836,7 @@ function ssn_list_themes($taxonomy) {
  * @param string $taxonomy
  */
 function ssn_list_posts($post_type) {
-	global $ssn_current_year, $ssn_last_year;
-	
-	$ssn_year = $ssn_last_year;
-	if (is_single()) {
-		$ssn_year = (is_null($year_found = ssn_get_last_year()))?$ssn_year:$year_found;
-	} elseif (!empty($ssn_current_year))
-		$ssn_year = $ssn_current_year;
+	$ssn_year = ssn_get_current_year();
 	
 	$metas_args = array('meta_key' => SSN_FICHE_META_PREFIX.'year_'.$ssn_year, 'meta_value' => '1');
 	if ($post_type == 'conference') {
@@ -855,6 +864,42 @@ function ssn_list_posts($post_type) {
 		foreach ($posts as $post) {
 			$title = esc_attr( $post->post_title );
 			$output .= '<li><a href="' . esc_url( get_permalink($post->ID) ) . '" title="'.$title.'">'.$post->post_title.'</a></li>';
+		}
+		$output .= '</ul>';
+	}
+
+	echo $output;
+}
+
+/**
+ * Display or retrieve the HTML list of a theme by taxonomy
+ *
+ * @param string $taxonomy
+ */
+function ssn_list_conferences() {
+	$ssn_year = ssn_get_current_year();
+
+	$metas_args = array(
+			'meta_key' => SSN_FICHE_META_PREFIX.'short_title', 'meta_compare' => 'EXIST',
+			'meta_query' => array(
+				array(
+					'key' => SSN_FICHE_META_PREFIX.'year', 'value' => $ssn_year
+				),
+		));
+	
+	$posts = get_posts(array_merge(array(
+			'post_type' => 'conference',
+			'orderby' => 'meta_value', 'order' => 'ASC', 'posts_per_page' => -1,
+	), $metas_args));
+
+	if (count($posts) <= 0) {
+		$output = '<p>'.__('Aucune fiche conférence en '.$ssn_year).'</p>';
+	} else {
+		$output = '<ul class="widget-' . esc_attr( 'conference' ) . '-list">';
+		foreach ($posts as $post) {
+			$short_title = get_post_meta( $post->ID, SSN_FICHE_META_PREFIX."short_title", true );
+			$title = esc_attr( $post->post_title );
+			$output .= '<li><a href="' . esc_url( get_permalink($post->ID) ) . '" title="'.$title.'">'.$short_title.'</a></li>';
 		}
 		$output .= '</ul>';
 	}

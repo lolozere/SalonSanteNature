@@ -14,6 +14,19 @@ class SSN_Widget_Conferences extends SSN_Widget_PostsList {
 		$this->SSN_Widget_PostsList();
 	}
 	
+	/**
+	 * Widget frontend output
+	 *
+	 * @param array $args
+	 * @param array $instance
+	 */
+	function widget( $args, $instance ) {
+		$args['post_type'] = $this->get_type();
+		extract( $args );
+		extract( $instance );
+		include( $this->getTemplateHierarchy( 'widget-conferences' ) );
+	}
+	
 	function get_base_settings() {
 		return array(
 				'widget_ops' => array(

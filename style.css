@@ -2146,6 +2146,24 @@ list-style-type:none;
 	
 aside.widget-plus{
 	margin-bottom:30px;}
+	
+/* ----------------------
+	WIDGET MENU
+--------------------------*/
+.widget_nav_menu h3, .widget_by_name h3 {
+	font-family: 'bebas_neueregular', Verdana, Geneva, sans-serif;
+	font-weight:normal;
+	display : inline ;
+	font-size: 24px;
+	font-size: 1.714285714rem;
+	line-height:40px;
+	letter-spacing:1px;
+	padding:3px;
+}
+.widgets-exposant h3 {
+	color: #3d121e;
+	background-color: #ffd403;
+}
 
 /*------------------------------*/
 /* WIDGETS EXPOSANTS ET THERAPEUTES */ 
@@ -2169,17 +2187,48 @@ aside.widget-plus{
 }
 
 /* Themes */
-.widget_themes ul li a, .widget_by_name ul li a {
+.widget_themes ul li a, .widget_by_name ul li a, .widget_nav_menu ul li a {
 	color: #555;
 	font-family: 'Ropa Sans', sans-serif;
 	font-size:16px;
 }
-.widget_themes ul li, .widget_by_name ul li {
+.widget_themes ul li, .widget_by_name ul li, .widget_nav_menu ul li {
 	line-height:20px;
 }
-.widget_by_name ul li {
-	list-style-type:circle;
-	margin-left:10px;
+.widget_by_name ul li, .widget_nav_menu ul li {
+	line-height:20px; padding-top: 3px; padding-bottom: 3px;
+	list-style:none; margin-left:10px;
+	border-bottom: 1px dotted #ddd;
+}
+
+/* scroll box */
+.widget_by_name .scroll {
+	position: relative; margin: 0; padding: 0; overflow: hidden;
+	height: 270px;
+}
+.widget_by_name .scroll .scroll-inner {
+	position: relative; margin: 0; padding: 0; z-index: 1;
+}
+.widget_by_name .scroll .scroll-control {
+	position: absolute; top: 240px; margin: 0 0 0 0; padding: 8px 0 0 0;
+	overflow: hidden; z-index: 2; background-color: #fff;
+	width: 100%;
+}
+.widget_by_name .scroll .scroll-control i { 
+	display: inline-block; width: 75px;
+	background-color: #ABA8A6; border-radius: 4px; padding: 4px;
+	
+} 
+.widget_by_name .scroll .scroll-control [data-direction="down"]  {
+	background-image: url(images/fleche-bas.png); background-repeat: no-repeat;
+	padding-left: 18px;
+}
+.widget_by_name .scroll .scroll-control [data-direction="up"] {
+	background-image: url(images/fleche-haut.png); background-repeat: no-repeat;
+	padding-left: 20px;
+}
+.widget_by_name .scroll .scroll-control [data-direction="all"]  {
+
 }
 
 /* Widget themes therapeutes */

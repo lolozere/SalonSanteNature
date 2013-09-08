@@ -13,7 +13,7 @@ if ( !empty( $title ) ) { echo $before_title . $title . $after_title; }?>
 <div id="<?php echo $widget_id;?>" data-toggle="scrollbox" class="scroll" data-height="240">
 	<div class="scroll-inner">
 <?php endif?>
-<?php ssn_list_posts($post_type); ?>
+<?php ssn_list_conferences(); ?>
 <?php if (!empty($minimize) && $minimize == '1'): ?>
 	</div>
 	<div class="scroll-control">

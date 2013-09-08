@@ -1,5 +1,8 @@
 <?php
 global $ssn_years;
+global $ssn_posts_list_slugs;
+
+$ssn_posts_list_slugs = array('exposants', 'conferences', 'therapeutes-bien-etre');
 
 /**
  * Return the most recent year of the post
@@ -22,6 +25,49 @@ function ssn_get_last_year() {
 		return current($years);
 	} else {
 		return null;
+	}
+}
+
+/**
+ * Return the request year
+ *
+ */
+function ssn_get_request_year() {
+	global $ssn_posts_list_slugs, $ssn_current_year, $ssn_last_year;
+	foreach($ssn_posts_list_slugs as $slug) {
+		$regex = '/'.$slug.'\/([0-9]{4})\/?/';
+		//echo $regex; exit();
+		if (preg_match($regex, $_SERVER['REQUEST_URI'], $years)) {
+			return $years[1];
+		}
+	}
+	if (preg_match('/([0-9]{4})\/?$/', $_SERVER['REQUEST_URI'], $years)) {
+		return $years[1];
+	}
+	if (preg_match('/([0-9]{4})\/page\/[0-9]+\/?$/', $_SERVER['REQUEST_URI'], $years)) {
+		return $years[1];
+	}
+	return $ssn_last_year;
+}
+
+/**
+ * Return the current year
+ *
+ */
+function ssn_get_current_year() {
+	global $ssn_current_year, $ssn_last_year;
+	if (is_single() && !is_null($year = ssn_get_last_year())) {
+		return $year;
+	}
+	$year = ssn_get_request_year();
+	if ($year != $ssn_current_year) {
+		return $year;
+	} elseif (!empty($ssn_current_year)) {
+		return $ssn_current_year;
+	} elseif ($ssn_last_year != $ssn_current_year) {
+		return $ssn_current_year;
+	} else {
+		return $ssn_last_year;
 	}
 }
 
@@ -58,6 +104,7 @@ function ssn_create_exposant() {
 					'labels' => $labels,
 					'public' => true,
 					'menu_position' => 6,
+					'has_archive' => true,
 					'hierarchical' => false,
 					'supports' => $supports,
 					'rewrite' => array( 'slug' => __('exposant', 'ssn') ),
@@ -65,6 +112,14 @@ function ssn_create_exposant() {
 			)
 	);
 }
+
+/*add_filter('rewrite_rules_array', 'ssn_rewrite_rules');
+function ssn_rewrite_rules($rules) {
+	echo nl2br(print_r($rules, true));
+	exit();
+	return $rules;
+}*/
+
 // Custom Taxonomy Exposants Themes for Exposant
 add_action( 'init', 'ssn_exposant_build_taxonomies', 0 );
 function ssn_exposant_build_taxonomies() {
@@ -166,6 +221,7 @@ function ssn_create_therapeute() {
 					'public' => true,
 					'menu_position' => 7,
 					'hierarchical' => false,
+					'has_archive' => true,
 					'supports' => $supports,
 					'rewrite' => array( 'slug' => __('therapeute', 'ssn') ),
 					'menu_icon' => get_template_directory_uri() . '/images/icone-therapeute.png'
@@ -221,6 +277,13 @@ $meta_boxes[] = array(
 						'id'	=> SSN_FICHE_META_PREFIX."site_url",
 						'type'	=> 'text'
 				),
+				array(
+						'name'	=> __("Identifiant d'animation", 'ssn'),
+						'desc'	=> __('Pour afficher les disponiblités restantes du thérapeutes, saisir son identifiant dans la plateforme de réservation', 'ssn'),
+						'clone'		=> false,
+						'id'	=> SSN_FICHE_META_PREFIX."animation_id",
+						'type'	=> 'text'
+				),
 		)
 );
 foreach($ssn_years as $year) {
@@ -273,6 +336,7 @@ function ssn_create_conference() {
 					'public' => true,
 					'menu_position' => 8,
 					'hierarchical' => false,
+					'has_archive' => true,
 					'supports' => $supports,
 					'rewrite' => array( 'slug' => __('conference', 'ssn') ),
 					'menu_icon' => get_template_directory_uri() . '/images/icone-micro.png'
@@ -281,15 +345,18 @@ function ssn_create_conference() {
 }
 $meta_boxes[] = array(
 		'id'		=> 'conference_additional',
-		'title'		=> __('Année de la conférence', 'ssn'),
+		'title'		=> __('Détails sur la conférence', 'ssn'),
 		'pages'		=> array( 'conference' ),
-		'fields'	=> array(),
-);
-$meta_boxes[count($meta_boxes)-1]['fields'][] = array(
-			'name'	=> '',
+		'fields'	=> array(array(
+			'name'	=> __('Année de la conférence', 'ssn'),
 			'id'	=> SSN_FICHE_META_PREFIX."year",
 			'type'	=> 'text'
-	);
+	), array(
+				'name'	=> __('Titre court', 'ssn'),
+				'id'	=> SSN_FICHE_META_PREFIX."short_title",
+				'type'	=> 'text'
+		)),
+);
 
 //Add Exposants in RSS Feed
 function ssn_conference_feed($qv) {
@@ -298,6 +365,40 @@ function ssn_conference_feed($qv) {
 	return $qv;
 }
 add_filter('request', 'ssn_conference_feed');
+
+/*-----------------------------------------------------------------------------------*/
+// REWRITING
+/*-----------------------------------------------------------------------------------*/
+add_action( 'init', 'ssn_posts_rewriting' );
+function ssn_posts_rewriting() {
+	global $wp_rewrite;
+	// Exposants
+	add_rewrite_rule('^exposants/?$','index.php?post_type=exposant','top');
+	add_rewrite_rule('^exposants/page/([0-9]+)/?$','index.php?post_type=exposant&paged=$matches[1]','top');
+	add_rewrite_rule('^exposants/([0-9]{4})/page/([0-9]+)/?$','index.php?post_type=exposant&season=$matches[1]&paged=$matches[2]','top');
+	add_rewrite_rule('^exposants/([0-9]{4})/?$','index.php?post_type=exposant','top');
+	add_rewrite_rule('^exposants-par-themes/([^/]*)/([0-9]{4})/?$','index.php?post_type=exposant&exposant_theme=$matches[1]&taxonomy=exposant_theme&term=$matches[1]','top');
+	add_rewrite_rule('^exposants-par-themes/([^/]*)/([0-9]{4})/page/([0-9]+)/?$','index.php?post_type=exposant&exposant_theme=$matches[1]&taxonomy=exposant_theme&term=$matches[1]&paged=$matches[3]','top');
+	
+	// Thérapeutes
+	add_rewrite_rule('^therapeutes-bien-etre/?$','index.php?post_type=therapeute','top');
+	add_rewrite_rule('^therapeutes-bien-etre/page/([0-9]+)/?$','index.php?post_type=therapeute&paged=$matches[1]','top');
+	add_rewrite_rule('^therapeutes-bien-etre/([0-9]{4})/page/([0-9]+)/?$','index.php?post_type=therapeute&season=$matches[1]&paged=$matches[2]','top');
+	add_rewrite_rule('^therapeutes-bien-etre/([0-9]{4})/?$','index.php?post_type=therapeute','top');
+	add_rewrite_rule('^therapeutes-par-themes/([^/]*)/([0-9]{4})/?$','index.php?post_type=therapeute&tpeute_theme=$matches[1]&taxonomy=tpeute_theme&term=$matches[1]','top');
+	add_rewrite_rule('^therapeutes-par-themes/([^/]*)/([0-9]{4})/page/([0-9]+)/?$','index.php?post_type=therapeute&tpeute_theme=$matches[1]&taxonomy=tpeute_theme&term=$matches[1]&paged=$matches[3]','top');
+
+	/*$wp_query->set('tpeute_theme', $wp_query->get('category_name'));
+	 $wp_query->set('taxonomy', 'tpeute_theme');
+	$wp_query->set('term', $wp_query->get('tpeute_theme'));
+	$wp_query->set('category_name', '');
+	$wp_query->is_tax = true; $wp_query->is_category = false;*/
+
+	//add_rewrite_rule('exposants/?','index.php?post_type=exposant','top');
+	//add_rewrite_rule('exposants/page/([0-9]+)/?','index.php?post_type=exposant&paged=$matches[1]','top');
+	//add_rewrite_rule('^exposants/([0-9]{4})/?','index.php?&paged=1&ssnyear=$matches[1]','top');
+	$wp_rewrite->flush_rules(false);
+}
 
 /*-----------------------------------------------------------------------------------*/
 // ADMIN LIST
@@ -329,6 +430,7 @@ function tpeute_theme_edit_columns($columns){
 			"title" => __( 'Thérapeute', 'ssn' ),
 			"year" => __( 'Années', 'ssn' ),
 			"theme" => __( 'Thème', 'ssn' ),
+			"animation_id" => __( 'ID Animations', 'ssn' ),
 			"date" => __( 'Date de publication', 'ssn' ),
 	);
 	return $columns;
@@ -359,12 +461,21 @@ function ssn_custom_columns_post_type($column){
 			}
 			echo join(', ', array_unique($years));
 			break;
+		case 'animation_id':
+			$metas = get_metadata('post', $post->ID);
+			foreach($metas as $meta_key => $meta_value) {
+				if ($meta_key == SSN_FICHE_META_PREFIX.'animation_id') {
+					echo $meta_value[0];
+				}
+			}
+			break;
+				
 	}
 	if ($column == 'theme' && $post->post_type == 'exposant') {
 		echo get_the_term_list( $post->ID, 'exposant_theme', '', ', ', '');
 	} elseif ($column == 'theme' && $post->post_type == 'therapeute') {
 		echo get_the_term_list( $post->ID, 'tpeute_theme', '', ', ', '');
-	} 
+	}
 }
 add_action("manage_posts_custom_column",  "ssn_custom_columns_post_type");
 

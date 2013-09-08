@@ -18,21 +18,21 @@
 .passbook_availability_notice.full { background-color: red; }
 	
 /* SCROLL CONTROL */
-.scroll {
+.passbook-availability .scroll {
 	position: relative; margin: 0; padding: 0; overflow: hidden;
 }
-.scroll .scroll-inner {
+.passbook-availability .scroll .scroll-inner {
 	position: relative; margin: 0; padding: 0; z-index: 1;
 	left: 20px;
 }
-.scroll .scroll-control {
+.passbook-availability .scroll .scroll-control {
 	position: absolute; top: 10px; margin: 0; padding: 0 0 0 0; z-index: 2; left: 0px;
 }
-.scroll .scroll-control i { display: block; width: 16px; height: 16px; } 
-.scroll .scroll-control .icon-arrow-down {
+.passbook-availability .scroll .scroll-control i { display: block; width: 16px; height: 16px; } 
+.passbook-availability .scroll .scroll-control .icon-arrow-down {
 	background-image: url(fleche-bas.png); 
 }
-.scroll .scroll-control .icon-arrow-up {
+.passbook-availability .scroll .scroll-control .icon-arrow-up {
 	background-image: url(fleche-haut.png); margin-bottom: 2px;
 }
-.scroll .scroll-control > * { display: block; }
+.passbook-availability .scroll .scroll-control > * { display: block; }

@@ -32,6 +32,7 @@ abstract class SSN_Widget_PostsList extends SSN_Widget {
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
+		$instance['minimize'] = $new_instance['minimize'];
 		$instance = array_merge($this->get_defaults(), $instance);
 		return $instance;
 	}
@@ -63,6 +64,7 @@ abstract class SSN_Widget_PostsList extends SSN_Widget {
 	function get_defaults() {
 		return array(
 				'title' => "Liste des fiches par ordre alphabétique",
+				'minimize' => '0',
 			);
 	}
 

@@ -3,10 +3,12 @@
 <?php global $ssn_current_year; ?>
 	<section id="primary" class="site-content <?echo ssn_get_class_content();?>">
 		<div id="content" role="main" class="articles-list therapeutes-list">
-			<?php if ( have_posts() ) : ?>
+			<?php 
+			
+			if ( have_posts() ) : ?>
 				<header class="archive-header">
 					<h1 class="archive-title">
-						<?php echo sprintf(__('Pôle thérapie / Bien-être', 'ssn') . ' %s', $ssn_current_year); ?> &gt;
+						<?php echo sprintf(__('Pôle thérapie / Bien-être', 'ssn') . ' %s', ssn_get_current_year()); ?> &gt;
 						<?php 
 						$current_term = get_term_by( 'slug', get_query_var('term') ,'tpeute_theme' );								
 						echo '<span>'.$current_term->name.'</span>'; 
