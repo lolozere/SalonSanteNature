@@ -5,6 +5,12 @@
 
 define('SSN_VERSION', '2013.1');
 
+global $ssn_emails_orga;
+$ssn_emails_orga = array(
+		array('name' => 'Gilles', 'email' => 'gilles.langellotti88@gmail.com'), 
+		array('name' => 'Nathalie', 'email' => 'assodanslavie@gmail.com')
+	);
+
 /**
  * Sets up the content width value based on the theme's design and stylesheet.
  */
@@ -38,6 +44,7 @@ define('SSN_PAGE_NEWSLETTER', 702);
 define('SSN_PAGE_INVITATION_GRATUITE', 2294);
 
 require_once(get_template_directory().'/includes/templating.php');
+require_once(get_template_directory().'/includes/comments.php');
 
 function ssn_setup() {
 	/*
