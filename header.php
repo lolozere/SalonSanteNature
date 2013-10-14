@@ -83,7 +83,7 @@ wp_head();
 							</ul>
 						</li>
 						<li id="liExposant" class="menu-rubrique <?php echo (!is_rubrique_exposants())?'off':'default';?>" data-rubrique="exposant">
-							<a class="menuprincipal" href="<?php echo get_permalink(SSN_PAGE_EXPOSANTS_ID);?>"><span>Exposants</span></a>
+							<a class="menuprincipal" href="/exposants/"><span>Exposants</span></a>
 							<ul id="jaune" class="menuprincipal-links">
 								<li>
 									<div class="menu-exposant-container">
