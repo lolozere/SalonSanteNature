@@ -7,7 +7,7 @@ define('SSN_VERSION', '2013.1');
 
 global $ssn_emails_orga;
 $ssn_emails_orga = array(
-		array('name' => 'Gilles', 'email' => 'gilles.langellotti88@gmail.com'), 
+		array('name' => 'Gilles', 'email' => 'gilles.langellotti88@gmail.com'),
 		array('name' => 'Nathalie', 'email' => 'assodanslavie@gmail.com')
 	);
 
@@ -850,7 +850,7 @@ function ssn_list_posts($post_type) {
 		$metas_args = array('meta_key' => SSN_FICHE_META_PREFIX.'year', 'meta_value' => $ssn_year);
 	}
 	$posts = get_posts(array_merge(array(
-			'post_type' => $post_type, 
+			'post_type' => $post_type,
 			'orderby' => 'title', 'order' => 'ASC', 'posts_per_page' => -1,
 		), $metas_args));
 	
@@ -914,163 +914,33 @@ function ssn_list_conferences() {
 	echo $output;
 }
 
-/*
- * 
- * 
-
--- MIGRATION CONFERENCES
-
-UPDATE wp_posts SET post_type='conference' WHERE post_type='post' AND EXISTS(
-	SELECT * FROM wp_terms 
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
-	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
-	WHERE wp_terms.name LIKE 'Conférences%' AND object_id=wp_posts.ID 
-);
-INSERT INTO wp_postmeta (post_id, meta_key, meta_value)
-SELECT ID, 'SSN_META_year', '2012' 
-FROM wp_posts
-WHERE EXISTS(
-	SELECT * FROM wp_terms 
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
-	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
-	WHERE wp_terms.name LIKE 'Conférences 2012%' AND object_id=wp_posts.ID 
-);
-INSERT INTO wp_postmeta (post_id, meta_key, meta_value)
-SELECT ID, 'SSN_META_year', '2011' 
-FROM wp_posts
-WHERE EXISTS(
-	SELECT * FROM wp_terms 
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
-	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
-	WHERE wp_terms.name LIKE 'Conférences 2011%' AND object_id=wp_posts.ID 
-);
-
--- MIGRATION EXPOSANTS
-
-UPDATE wp_posts SET post_type='exposant' WHERE post_type='post' AND EXISTS(
-	SELECT * FROM wp_terms 
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
-	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
-	WHERE wp_terms.name LIKE 'Exposants%' AND object_id=wp_posts.ID 
-);
-UPDATE wp_posts SET post_type='exposant' WHERE post_type='post' AND EXISTS(
-	SELECT * FROM wp_terms 
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
-	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
-	WHERE wp_terms.name LIKE 'Thérapies et bien-être%' AND object_id=wp_posts.ID 
-);
-UPDATE wp_posts SET post_type='exposant' WHERE post_type='post' AND EXISTS(
-	SELECT * FROM wp_terms 
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
-	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
-	WHERE wp_terms.name LIKE 'Monde solidaire%' AND object_id=wp_posts.ID 
-);
-
-INSERT INTO wp_postmeta (post_id, meta_key, meta_value)
-SELECT ID, 'SSN_META_year_2011', '1' 
-FROM wp_posts
-WHERE EXISTS(
-	SELECT * FROM wp_terms 
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
-	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
-	WHERE wp_terms.name LIKE 'Exposants 2011%' AND object_id=wp_posts.ID 
-);
-INSERT INTO wp_postmeta (post_id, meta_key, meta_value)
-SELECT ID, 'SSN_META_year_2012', '1' 
-FROM wp_posts
-WHERE EXISTS(
-	SELECT * FROM wp_terms 
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
-	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
-	WHERE wp_terms.name LIKE 'Exposants 2012%' AND object_id=wp_posts.ID 
-);
-
-UPDATE wp_postmeta SET meta_key='SSN_META_site_url' WHERE meta_key LIKE 'site';
-UPDATE wp_postmeta SET meta_value=CONCAT('http://', meta_value) WHERE meta_key LIKE 'SSN_META_site_url';
-
-# Migration catégorie
-INSERT INTO wp_term_relationships (object_id, term_taxonomy_id)
-SELECT ID, (SELECT wp_term_taxonomy.term_taxonomy_id
-	FROM `wp_terms`
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id = wp_terms.term_id
-	WHERE taxonomy = 'exposant_theme' AND name LIKE 'Alimentation, cosmétique bio' LIMIT 1
-)
-FROM wp_posts
-WHERE EXISTS(
-	SELECT * FROM wp_terms 
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
-	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
-	WHERE wp_terms.name LIKE 'Alimentation, cosmétique bio%' AND object_id=wp_posts.ID 
-);
-INSERT INTO wp_term_relationships (object_id, term_taxonomy_id)
-SELECT ID, (SELECT wp_term_taxonomy.term_taxonomy_id
-	FROM `wp_terms`
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id = wp_terms.term_id
-	WHERE taxonomy = 'exposant_theme' AND name LIKE 'Culture et jeu' LIMIT 1
-)
-FROM wp_posts
-WHERE EXISTS(
-	SELECT * FROM wp_terms 
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
-	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
-	WHERE wp_terms.name LIKE 'Culture et jeu%' AND object_id=wp_posts.ID 
-);
-INSERT INTO wp_term_relationships (object_id, term_taxonomy_id)
-SELECT ID, (SELECT wp_term_taxonomy.term_taxonomy_id
-	FROM `wp_terms`
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id = wp_terms.term_id
-	WHERE taxonomy = 'exposant_theme' AND name LIKE 'Maison, Jardin, Terre' LIMIT 1
-)
-FROM wp_posts
-WHERE EXISTS(
-	SELECT * FROM wp_terms 
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
-	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
-	WHERE wp_terms.name LIKE 'Maison, Jardin, Terre%' AND object_id=wp_posts.ID 
-);
-INSERT INTO wp_term_relationships (object_id, term_taxonomy_id)
-SELECT ID, (SELECT wp_term_taxonomy.term_taxonomy_id
-	FROM `wp_terms`
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id = wp_terms.term_id
-	WHERE taxonomy = 'exposant_theme' AND name LIKE 'Monde solidaire' LIMIT 1
-)
-FROM wp_posts
-WHERE EXISTS(
-	SELECT * FROM wp_terms 
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
-	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
-	WHERE wp_terms.name LIKE 'Monde solidaire%' AND object_id=wp_posts.ID 
-);
-INSERT INTO wp_term_relationships (object_id, term_taxonomy_id)
-SELECT ID, (SELECT wp_term_taxonomy.term_taxonomy_id
-	FROM `wp_terms`
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id = wp_terms.term_id
-	WHERE taxonomy = 'exposant_theme' AND name LIKE 'Thérapies et bien-être' LIMIT 1
-)
-FROM wp_posts
-WHERE EXISTS(
-	SELECT * FROM wp_terms 
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
-	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
-	WHERE wp_terms.name LIKE 'Thérapies et bien-être%' AND object_id=wp_posts.ID 
-);
-INSERT INTO wp_term_relationships (object_id, term_taxonomy_id)
-SELECT ID, (SELECT wp_term_taxonomy.term_taxonomy_id
-	FROM `wp_terms`
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id = wp_terms.term_id
-	WHERE taxonomy = 'exposant_theme' AND name LIKE 'Vêtements, Bijoux, Accessoires' LIMIT 1
-)
-FROM wp_posts
-WHERE EXISTS(
-	SELECT * FROM wp_terms 
-	INNER JOIN wp_term_taxonomy ON wp_term_taxonomy.term_id=wp_terms.term_id
-	INNER JOIN wp_term_relationships ON wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
-	WHERE wp_terms.name LIKE 'Vêtements, Bijoux, Accessoires%' AND object_id=wp_posts.ID 
-);
-UPDATE wp_term_taxonomy SET count=(
-	SELECT COUNT(*) FROM wp_posts INNER JOIN wp_term_relationships ON object_id=ID
-	WHERE wp_term_relationships.term_taxonomy_id=wp_term_taxonomy.term_taxonomy_id
-) WHERE taxonomy='exposant_theme';
- 
+add_action('phpmailer_init','send_smtp_email');
+/**
+ * Use GMAIL SMTP for send email
+ *
+ * @param PHPMailer $phpmailer
  */
+function send_smtp_email( $phpmailer )
+{
+	// Define that we are sending with SMTP
+	$phpmailer->IsSMTP();
+
+	// The hostname of the mail server
+	$phpmailer->Host = "smtp.salon-sante-nature.fr";
+
+	// Use SMTP authentication (true|false)
+	$phpmailer->SMTPAuth = true;
+
+	// SMTP port number - likely to be 25, 465 or 587
+	$phpmailer->Port = "587";
+
+	// Username to use for SMTP authentication
+	$phpmailer->Username = "postmaster@salon-sante-nature.fr";
+
+	// Password to use for SMTP authentication
+	$phpmailer->Password = "ssnpwd31#";
+
+	// The encryption system to use - ssl (deprecated) or tls
+	//$phpmailer->SMTPSecure = "tls";
+}
 

@@ -31,8 +31,8 @@ global $ssn_last_year, $ssn_years;
 <!--[if lt IE 9]>
 <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js?<?php echo SSN_VERSION;?>" type="text/javascript"></script>
 <![endif]-->
-<?php 
-wp_head(); 
+<?php
+wp_head();
 ?>
 </head>
 <body <?php body_class(); ?>>
@@ -51,10 +51,7 @@ wp_head();
 					</nav>
 				</div>
                 <div id="social_btn">
-                <a href="https://www.facebook.com/SALON.SANTE.NATURE?fref=ts"><img src="<?php echo get_template_directory_uri(); ?>/images/facebook.png" alt="facebook" title="suivez-nous sur facebook" /></a>
-                <a href="https://plus.google.com/104156860937284771144/posts?hl=fr"><img src="<?php echo get_template_directory_uri(); ?>/images/google.png" alt="google+" title="suivez-nous sur google+" /></a>
-                <a href="https://twitter.com/SalonSanteNatur"><img src="<?php echo get_template_directory_uri(); ?>/images/twitter.png" alt="twitter" title="suivez-nous sur twitter" /></a>
-
+                	<a href="https://www.facebook.com/SALON.SANTE.NATURE?fref=ts"><img src="<?php echo get_template_directory_uri(); ?>/images/facebook.png" alt="facebook" title="suivez-nous sur facebook" /></a>
                 </div>
 		        <nav id="site-navigation" class="main-navigation" role="navigation">
 		            <ul id="site-navigation-menu">
