@@ -37,7 +37,10 @@ class SSN_Widget_PassbookAvailability extends WP_Widget {
 	
 	function widget( $args, $instance ) {
 		global $post;
-		$is_animation_card = (is_single() && $post->post_type == 'therapeute');
+		$is_animation_card = (is_single() && $post->post_type == 'therapeute') || (is_page() && $post->post_parent == '6414') ;
+		//6414 étant la page quoi de neuf
+		
+
 		if ($is_animation_card) {
 			//get animation id
 			$metas = get_metadata('post', $post->ID);

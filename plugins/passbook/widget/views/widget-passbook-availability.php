@@ -53,10 +53,26 @@
 </script>
 <div id="passbook-availability_<?php echo $id;?>" class="passbook-availability">
 <div style="display: none;">
+
+
+		<?php $is_animation_card = (is_page() && $post->post_parent == '6414') ; 
+		//6414 étant la page quoi de neuf
+		
+	
+
+		if ($is_animation_card) { echo '​<br/><p>Pour réservez un atelier adulte, acheter votre e-ticket "<a href="https://www.weezevent.com/salon-sante-nature-2015" target="_blank">Adhésion Asso Une autre idée de la Vie - Particulier</a>".</p><br/>
+		<p>Puis réservez votre atelier sur <a href="http://pass.salon-sante-nature.fr/booking/login" target="_blank">notre plateforme de réservation.</a></p><br/>
+		<p> Cet e-ticket vous servira aussi comme billet d'."'entrée au Salon Santé Nature en septembre 2015​.</p><br/>" ;}
+
+else {echo '
 	<p>
 		Avant de prendre rendez-vous, vous devez <a href="http://www.salon-sante-nature.fr/entree-gratuite/#reservation">commander votre e-ticket PASS Bien-être</a>.<br />
 		Puis programmez vos rendez-vous sur <a href="http://pass.salon-sante-nature.fr">notre plateforme de réservation.</a>
 	</p>
+    
+    ';}	?>
+    
+    
 	<p><strong>Légende</strong></p>
 	<table border="0" cellpadding="1" cellspacing="1">
 		<tbody>
