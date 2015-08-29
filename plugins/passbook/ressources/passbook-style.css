@@ -1,5 +1,14 @@
 /* global */
-.widget_passbook_availability h3.widget-title { background-color: #FA7C1F; color: #fff; }
+.widget_passbook_availability h3.widget-title { 
+	background-color: #FA7C1F; color: #fff;
+    display: inline;
+    font-family: "bebas_neueregular",Verdana,Geneva,sans-serif;
+    font-size: 1.71429rem;
+    font-weight: normal;
+    letter-spacing: 1px;
+    line-height: 40px;
+    padding: 3px;
+}
 .passbook-availability * { 
 	color: #555555;
     font-family: 'Ropa Sans',sans-serif;
@@ -10,6 +19,11 @@
 .passbook-availability a { color: #00C4FF; text-decoration: none; }
 .passbook-availability table td { border: 1px solid #fff; }
 .passbook-availability table td { padding: 2px; }
+
+/* location */
+.passbook-availability .passbook-location {
+	font-size: 16px; font-weight: bold; color: #3d121e; display: inline; background-color: #d5e300; padding: 3px;
+}
 
 /* by section */
 .passbook_availability { margin-bottom: 0.5em; font-size: 1.15em; }

@@ -1,4 +1,4 @@
-<?php $id = uniqid(); 
+<?php $id = uniqid();
 ?>
 <script>
 !function ($) {
@@ -14,6 +14,8 @@
 				if (typeof availability == 'object' && availability.length > 0) {
 					panel.find(' > div').show();
 					for(var i = 0; i<availability.length; i++) {
+						// Location
+						panel.find('.passbook-location').html(availability[i].location);
 						// Nb elements
 						var propName;
 						var numberOfElements = 0;
@@ -55,7 +57,7 @@
 <div style="display: none;">
 
 
-		<?php $is_animation_card = (is_page() && $post->post_parent == '6414') ; 
+		<?php $is_animation_card = (is_page() && $post->post_parent == '6414') ;
 		//6414 étant la page quoi de neuf
 		
 	
@@ -64,7 +66,11 @@
 		<p>Puis réservez votre atelier sur <a href="http://pass.salon-sante-nature.fr/booking/login" target="_blank">notre plateforme de réservation.</a></p><br/>
 		<p> Cet e-ticket vous servira aussi comme billet d'."'entrée au Salon Santé Nature en septembre 2015​.</p><br/>" ;}
 
-else {echo '
+else {
+	// Emplacement
+	echo '<p><span class="passbook-location">Stand ?</span></p>';
+	// Message d'info
+	echo '
 	<p>
 		Avant de prendre rendez-vous, vous devez <a href="http://www.salon-sante-nature.fr/entree-gratuite/#reservation">commander votre e-ticket PASS Bien-être</a>.<br />
 		Puis programmez vos rendez-vous sur <a href="http://pass.salon-sante-nature.fr">notre plateforme de réservation.</a>

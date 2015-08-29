@@ -1,5 +1,5 @@
 <?php
-define('PASSBOOK_VERSION', '2013.1');
+define('PASSBOOK_VERSION', '2015.2');
 
 // Load the widget on widgets_init
 function ssn_load_passbook_availability_widget() {
@@ -25,7 +25,7 @@ add_action('wp_enqueue_scripts', 'ssn_passbook_js');
 
 /**
  * SSN_Widget_Exposants class
- * 
+ *
  * @author Laurent Chedanne
  **/
 class SSN_Widget_PassbookAvailability extends WP_Widget {
